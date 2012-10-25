@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: jgardner03
 Tags: arconix, flexslider, slider
-Requires at least: 3.1
-Tested up to: 3.3.1
-Stable tag: 0.2.1
+Requires at least: 3.4
+Tested up to: 3.4.2
+Stable tag: 0.5
 
 A multi-purpose responsive jQuery slider that supports custom post types and responsive themes.
 

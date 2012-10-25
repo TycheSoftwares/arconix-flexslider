@@ -1,7 +1,7 @@
 /*  Stylesheet for Arconix Flexslider plugin
 
-    Copy "flexslider.css" from "/arconix-flexslider/" to your theme's directory and rename it
-    to "arconix-flexslider.css "to replace the plugin's default stylesheet.
+    Copy "flexslider.css" to your theme's directory and rename it to
+    "arconix-flexslider.css" to use your own stylesheet in place of this one.
 
     If you want to use the existing nav buttons, make sure to copy the "nav-buttons.png" and
     "nav-arrows.png" to your theme's images folder and update the path if necessary, or create
@@ -77,10 +77,10 @@ html[xmlns] .slides { display: block; }
 .flexslider {
     background: #fff;
     border: 4px solid #fff;
-    border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-o-border-radius: 5px;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+         -o-border-radius: 5px;
+            border-radius: 5px;
     position: relative;
     zoom: 1;
 }
@@ -124,7 +124,7 @@ html[xmlns] .slides { display: block; }
 .flex-direction-nav { height: 0; }
 
 .flex-direction-nav li a {
-    background: url(images/nav-arrows.png) no-repeat;
+    background: url(../images/nav-arrows.png) no-repeat;
     cursor: pointer;
     display: block;
     margin: -13px 0 0;
@@ -159,7 +159,6 @@ html[xmlns] .slides { display: block; }
 
 .flex-control-nav li {
     display: inline-block;
-    *display: inline;
     margin: 0 0 0 5px;
     zoom: 1;
 }
@@ -167,7 +166,7 @@ html[xmlns] .slides { display: block; }
 .flex-control-nav li:first-child { margin: 0; }
 
 .flex-control-nav li a {
-    background: url(images/nav-buttons.png) no-repeat;
+    background: url(../images/nav-buttons.png) no-repeat;
     cursor: pointer;
     display: block;
     text-indent: -999em;
