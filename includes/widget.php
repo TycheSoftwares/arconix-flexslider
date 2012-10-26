@@ -8,7 +8,6 @@ function register_widget() {
     register_widget( 'Arconix_FlexSlider_Widget' );
 }
 
-
 /**
  * FlexSlider Widget
  *
@@ -35,7 +34,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 	$this->defaults = array(
 	    'title'             => '',
 	    'post_type'         => 'post',
-            'posts_per_page'    => 5,        
+            'posts_per_page'    => 5,
             'orderby'           => 'date',
             'order'             => 'DESC',
             'image_size'        => 'thumbnail',
@@ -54,7 +53,6 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 	);
 
         $this->WP_Widget( 'arconix-flexslider-widget', 'Arconix - FlexSlider', $widget_ops, $control_ops );
-        
     }
 
     /**
@@ -63,7 +61,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * @param type $args Display arguments including before_title, after_title, before_widget, and after_widget.
      * @param type $instance The settings for the particular instance of the widget
      * @since 0.1
-     * @version 0.2
+     * @version 0.5
      */
     function widget( $args, $instance ) {
 
@@ -134,7 +132,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 		    echo '<option value="' . $type . '" ' . selected( $type, $instance['post_type'], FALSE ) . '>' . $type . '</option>';
 		?>
 	    </select>
-        </p>        
+        </p>
         <!-- Posts Number: Input Box -->
 	<p>
 	    <label for="<?php echo esc_attr( $this->get_field_id( 'posts_per_page' ) ); ?>"><?php _e( 'Number of posts to show:', 'acfs' ); ?></label>
@@ -200,8 +198,8 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 		?>
 	    </select>
 	</p>
-        
-        
+
+
 
 	<?php
     }
