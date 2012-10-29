@@ -2,8 +2,8 @@
 
 /**
  * Register the dashboard widget
- * 
- * @since 0.1 
+ *
+ * @since 0.1
  */
 function register_dashboard_widget() {
     wp_add_dashboard_widget( 'ac-flexslider', 'Arconix FlexSlider', 'dashboard_widget_output' );
@@ -13,6 +13,7 @@ function register_dashboard_widget() {
  * Output for the dashboard widget
  *
  * @since 0.1
+ * @version 0.5
  */
 function dashboard_widget_output() {
     echo '<div class="rss-widget">';
@@ -28,9 +29,10 @@ function dashboard_widget_output() {
 
     echo '<div class="acfs-widget-bottom"><ul>';
     ?>
-        <li><img src="<?php echo ACFS_URL . 'images/page-16x16.png'; ?>"><a href="http://arcnx.co/afswiki">Wiki Page</a></li>
-        <li><img src="<?php echo ACFS_URL . 'images/help-16x16.png'; ?>"><a href="http://arcnx.co/afshelp">Support Forum</a></li>
-        <li><img src="<?php echo ACFS_URL . 'images/trello-16x16.png'; ?>"><a href="http://arcnx.co/aftrello">Dev Board</a></li>
+        <li><a href="http://arcnx.co/afswiki"><img src="<?php echo ACFS_URL . 'images/page-16x16.png'; ?>">Wiki Page</a></li>
+        <li><a href="http://arcnx.co/afshelp"><img src="<?php echo ACFS_URL . 'images/help-16x16.png'; ?>">Support Forum</a></li>
+        <li><a href="http://arcnx.co/aftrello"><img src="<?php echo ACFS_URL . 'images/trello-16x16.png'; ?>">Dev Board</a></li>
+        <li><a href="http://arcnx.co/afssource"><img src="<?php echo ACFS_URL . 'images/github-16x16.png'; ?>">Source Code</a></li>
     <?php
     echo '</ul></div></div>';
 
@@ -39,7 +41,7 @@ function dashboard_widget_output() {
             #ac-flexslider .rsssummary { display: block; }
             #ac-flexslider .acfs-widget-bottom { border-top: 1px solid #ddd; padding-top: 10px; text-align: center; }
             #ac-flexslider .acfs-widget-bottom ul { list-style: none; }
-            #ac-flexslider .acfs-widget-bottom ul li { display: inline; padding-right: 9%; }
+            #ac-flexslider .acfs-widget-bottom ul li { display: inline; padding-right: 20px; }
             #ac-flexslider .acfs-widget-bottom img { padding-right: 3px; vertical-align: middle; }
         </style>';
 }
