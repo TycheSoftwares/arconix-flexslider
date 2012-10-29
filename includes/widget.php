@@ -4,7 +4,7 @@
  *
  * @since 0.1
  */
-function register_widget() {
+function register_acfs_widget() {
     register_widget( 'Arconix_FlexSlider_Widget' );
 }
 
