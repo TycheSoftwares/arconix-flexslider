@@ -29,7 +29,12 @@ class Arconix_FlexSlider {
      * @since 0.5
      */
     function __construct() {
-        add_action( 'plugins_loaded', array( $this, 'constants' ), 1 );
+
+        define( 'ACFS_VERSION', '0.5');
+        define( 'ACFS_URL', plugin_dir_url( __FILE__ ) );
+        define( 'ACFS_INCLUDES_URL', ACFS_URL . 'includes' );
+        define( 'ACFS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+        define( 'ACFS_INCLUDES_DIR', trailingslashit( ACFS_DIR . 'includes' ) );
 
         $this->hooks();
 
@@ -40,26 +45,13 @@ class Arconix_FlexSlider {
     }
 
     /**
-     * Define the plugin constants
-     *
-     * @since 0.5
-     */
-    function constants() {
-        define( 'ACFS_VERSION', '0.5');
-        define( 'ACFS_URL', plugin_dir_url( __FILE__ ) );
-        define( 'ACFS_INCLUDES_URL', ACFS_URL . 'includes' );
-        define( 'ACFS_DIR', plugin_dir_path( __FILE__ ) );
-        define( 'ACFS_INCLUDES_DIR', ACFS_DIR . 'includes' );
-    }
-
-    /**
      * Run the necessary functions and pull in the necessary supporting files
      *
      * @since 0.5
      */
     function hooks() {
         add_action( 'wp_enqueue_scripts', 'load_scripts' );
-        add_action( 'widgets_init', 'register_widget' );
+        add_action( 'widgets_init', 'register_acfs_widget' );
         add_action( 'wp_dashboard_setup', 'register_dashboard_widget' );
         add_action( 'wp_footer', 'print_scripts' );
 
