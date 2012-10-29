@@ -45,7 +45,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 
         $widget_ops = array(
             'classname'         => 'flexslider_widget',
-            'description'       => __( 'Featured Slider', 'acfs' ),
+            'description'       => __( 'Responsive slider able to showcase any post type', 'acfs' ),
         );
 
         $control_ops = array(
