@@ -38,9 +38,6 @@ class Arconix_FlexSlider {
 
         $this->hooks();
 
-        register_activation_hook( __FILE__, array( $this, 'activation' ) );
-        register_deactivation_hook( __FILE__, array( $this, 'deactivation' ) );
-
         add_shortcode( 'ac-flexslider', array( $this, 'flexslider_shortcode' ) );
     }
 
@@ -64,3 +61,4 @@ class Arconix_FlexSlider {
 }
 
 new Arconix_FlexSlider;
+?>

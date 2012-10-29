@@ -247,3 +247,4 @@ function flexslider_query( $args = '' ) {
     echo $flex;
 }
 
+?>
