@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Arconix Flexslider ===
 Contributors: jgardner03
 Tags: arconix, flexslider, slider
 Requires at least: 3.4
@@ -9,7 +9,7 @@ A multi-purpose responsive jQuery slider that supports custom post types and res
 
 == Description ==
 
-Arconix Flexslider is a plugin that utilizes the excellent, responsive FlexSlider jQuery plugin. This plugin supports a user-selected post types in addition to posts and pages on a per-widget basis, which is perfect for featured posts or recent portfolio items on the homepage
+Arconix Flexslider is a plugin that utilizes the excellent, responsive FlexSlider jQuery plugin. This plugin supports a user-selected post types in addition to posts and pages on a per-widget basis, which is perfect for featured posts or recent portfolio items on the homepage. It can be called by placing the widget in a widget area or by using the shortcode `[ac-flexslider]`
 
 = Features =
 * Resizes based on the user's device
@@ -33,7 +33,7 @@ Upgrade normally via your Wordpress admin -> Plugins panel.
 * Tutorials on advanced plugin usage can be found at [Arconix Computers](http://arconixpc.com/tag/arconix-flexslider)
 
 = What is responsive design? =
-Responsive design is in essence designing a website to cater to the dimensions of the user's device. It has become far more popular with the proliferation of web-enabled smartphones and tablets.
+Responsive design is in essence designing a website to cater to the dimensions of the user's device. It has become very popular with the proliferation of web-enabled smartphones and tablets.
 
 = Do I need a responsive theme to use this plugin? =
 Absolutely not. The slider will conform to the dimensions provided to it
@@ -53,12 +53,17 @@ I can certainly look into it. Contact me through [Twitter](http://arcnx.co/twitt
 
 == Changelog ==
 
-= 0.2.1 - 2012.05.03 =
+= 0.5 =
+* Added shortcode support
+* Added the ability to display the chosen post-type's content (either in whole or just the excerpt)
+* Added the option to display just the images without link tags (making the images un-clickable)
+
+= 0.2.1 =
 * fixed ie8 image scale issue
 
-= 0.2 - 2012.04.16 =
+= 0.2 =
 * Added additional options for image captions
 * Only return posts to display if they have featured images
 
-= 0.1 - 2012.03.23 =
+= 0.1 =
 * Initial release
