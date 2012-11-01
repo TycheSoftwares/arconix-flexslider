@@ -37,8 +37,8 @@ function load_scripts() {
  *
  * @since 0.5
  */
-function print_script() {
-    if( !self::$load_flex_js )
+function print_scripts() {
+    if( !Arconix_FlexSlider::$load_flex_js )
         return;
 
     wp_print_scripts( 'arconix-flexslider-js' );
@@ -114,7 +114,7 @@ function get_modified_post_type_list() {
  * @since 0.5
  */
 function flexslider_shortcode( $atts, $content = null ) {
-    //wp_enqueue_script( 'arconix-flexslider-js' );
+    wp_enqueue_script( 'arconix-flexslider-js' );
 
     $atts = shortcode_atts( array(
         'post_type' => 'post',
@@ -122,7 +122,7 @@ function flexslider_shortcode( $atts, $content = null ) {
         'orderby' => 'date',
         'order' => 'DESC',
         'image_size' => 'thumbnail',
-        'image_link' => true,
+        'image_link' => 1,
         'show_caption' => 'none',
         'show_content' => 'none'
     ) );
@@ -138,7 +138,7 @@ function flexslider_shortcode( $atts, $content = null ) {
  */
 function get_flexslider_query( $args = '' ) {
     /* Load the javascript */
-    self::$load_flex_js = true;
+    Arconix_FlexSlider::$load_flex_js = true;
 
     $defaults = array(
         'post_type' => 'post',
@@ -146,7 +146,7 @@ function get_flexslider_query( $args = '' ) {
         'orderby' => 'date',
         'order' => 'DESC',
         'image_size' => 'thumbnail',
-        'image_link' => true,
+        'image_link' => 1,
         'show_caption' => 'none',
         'show_content' => 'none'
     );
@@ -181,7 +181,7 @@ function get_flexslider_query( $args = '' ) {
             if( $image_link )
                 $return .= '<a href="' . get_permalink() . '" rel="bookmark">';
 
-            get_the_post_thumbnail( get_the_ID(), $image_size );
+            $return .= get_the_post_thumbnail( get_the_ID(), $image_size );
 
             switch( $show_caption ) {
                 case 'post title':

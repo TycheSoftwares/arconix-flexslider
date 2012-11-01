@@ -38,7 +38,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
             'orderby'           => 'date',
             'order'             => 'DESC',
             'image_size'        => 'thumbnail',
-            'image_link'        => true,
+            'image_link'        => 0,
             'show_caption'      => 'none',
             'show_content'      => 'none'
 	);
@@ -99,7 +99,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         $isntance = $old_instance;
 	$instance['title'] = strip_tags( $new_instance['title'] );
 	$instance['posts_per_page'] = (int) $new_instance['posts_per_page'];
-        $instance['image_link'] = !empty( $new_instance['image_link'] ) ? 1 : 0;
+        //$instance['image_link'] = !empty( $new_instance['image_link'] ) ? 1 : 0;
 
 	return $new_instance;
     }
@@ -173,7 +173,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 	</p>
         <!-- Image Link: Checkbox -->
         <p>
-            <input class="checkbox" type="checkbox" <?php checked( $instance['image_link'], true ) ?> id="<?php echo $this->get_field_id( 'image_link' ); ?>" name="<?php echo $this->get_field_name( 'image_link' ); ?>" />
+            <input id="<?php echo $this->get_field_id( 'image_link' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'image_link' ); ?>" value="1"<?php checked( $instance['image_link'] ); ?> />
             <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php _e( 'Hyperlink the image to permalink', 'acfs' ); ?></label>
         </p>
         <!-- Show Caption: Select Box -->
