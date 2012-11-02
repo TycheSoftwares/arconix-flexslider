@@ -125,10 +125,14 @@ function flexslider_shortcode( $atts, $content = null ) {
         'image_link' => 1,
         'show_caption' => 'none',
         'show_content' => 'none'
-    ) );
+    ), $atts );
 
     return get_flexslider_query( $atts );
 }
+function register_shortcodes() {
+	add_shortcode( 'ac-flexslider', 'flexslider_shortcode' );
+}
+
 
 /**
  * Returns flexslider query results

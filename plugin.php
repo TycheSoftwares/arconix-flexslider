@@ -37,8 +37,6 @@ class Arconix_FlexSlider {
         define( 'ACFS_INCLUDES_DIR', trailingslashit( ACFS_DIR . 'includes' ) );
 
         $this->hooks();
-
-        add_shortcode( 'ac-flexslider', array( $this, 'flexslider_shortcode' ) );
     }
 
     /**
@@ -48,6 +46,7 @@ class Arconix_FlexSlider {
      */
     function hooks() {
         add_action( 'wp_enqueue_scripts', 'load_scripts' );
+		add_action( 'init', 'register_shortcodes' ) ;
         add_action( 'widgets_init', 'register_acfs_widget' );
         add_action( 'wp_dashboard_setup', 'register_dashboard_widget' );
         add_action( 'wp_footer', 'print_scripts' );
