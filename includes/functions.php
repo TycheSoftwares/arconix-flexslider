@@ -110,13 +110,13 @@ function get_modified_post_type_list() {
  * Flexslider Shortcode
  *
  * @param type $atts
- * @param type $content
+ * @param type $content self-enclosing shortcode
  * @since 0.5
  */
 function flexslider_shortcode( $atts, $content = null ) {
     wp_enqueue_script( 'arconix-flexslider-js' );
-
-    $atts = shortcode_atts( array(
+    
+    $defaults = array(
         'post_type' => 'post',
         'posts_per_page' => 5,
         'orderby' => 'date',
@@ -125,14 +125,20 @@ function flexslider_shortcode( $atts, $content = null ) {
         'image_link' => 1,
         'show_caption' => 'none',
         'show_content' => 'none'
-    ), $atts );
-
-    return get_flexslider_query( $atts );
+    );
+    $args = shortcode_atts( $defaults, $atts );
+    
+    return get_flexslider_query( $args );
 }
+
+/**
+ * Register the plugin shortcode
+ * 
+ * @since 0.5
+ */
 function register_shortcodes() {
-	add_shortcode( 'ac-flexslider', 'flexslider_shortcode' );
+    add_shortcode( 'ac-flexslider', 'flexslider_shortcode' );
 }
-
 
 /**
  * Returns flexslider query results
