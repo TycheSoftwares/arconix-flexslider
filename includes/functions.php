@@ -45,68 +45,6 @@ function print_scripts() {
 }
 
 /**
- * Returns registered image sizes.
- *
- * @global array $_wp_additional_image_sizes Additionally registered image sizes
- * @return array Two-dimensional, with width, height and crop sub-keys
- * @since 0.1
- */
-function get_image_sizes() {
-
-    global $_wp_additional_image_sizes;
-    $additional_sizes = array();
-
-    $builtin_sizes = array(
-	'thumbnail' => array(
-	    'width' => get_option( 'thumbnail_size_w' ),
-	    'height' => get_option( 'thumbnail_size_h' ),
-	    'crop' => get_option( 'thumbnail_crop' ),
-	),
-        'medium' => array(
-	    'width' => get_option( 'medium_size_w' ),
-	    'height' => get_option( 'medium_size_h' ),
-	),
-        'large' => array(
-	    'width' => get_option( 'large_size_w' ),
-	    'height' => get_option( 'large_size_h' ),
-	)
-    );
-
-    if( $_wp_additional_image_sizes )
-	$additional_sizes = $_wp_additional_image_sizes;
-
-    return array_merge( $builtin_sizes, $additional_sizes );
-}
-
-/**
- * Return a modified list of Post Types
- *
- * @return type array Post Types
- * @since 0.1
- * @version 0.5
- */
-function get_modified_post_type_list() {
-    $post_types = get_post_types( '', 'names' );
-
-    /* Post types we want excluded from the drop down */
-    $excl_post_types = apply_filters( 'acfs_exclude_post_types',
-        array(
-            'revision',
-            'nav_menu_item',
-            'attachment',
-            'wpcf7_contact_form'
-        )
-    );
-
-    /** Loop through and exclude the items in the list */
-    foreach( $excl_post_types as $excl_post_type ) {
-        if( isset( $post_types[$excl_post_type] ) ) unset( $post_types[$excl_post_type] );
-    }
-
-    return $post_types;
-}
-
-/**
  * Flexslider Shortcode
  *
  * @param type $atts
@@ -114,26 +52,26 @@ function get_modified_post_type_list() {
  * @since 0.5
  */
 function flexslider_shortcode( $atts, $content = null ) {
-    wp_enqueue_script( 'arconix-flexslider-js' );
-    
+
     $defaults = array(
         'post_type' => 'post',
         'posts_per_page' => 5,
         'orderby' => 'date',
         'order' => 'DESC',
-        'image_size' => 'thumbnail',
+        'image_size' => 'medium',
         'image_link' => 1,
         'show_caption' => 'none',
         'show_content' => 'none'
     );
+
     $args = shortcode_atts( $defaults, $atts );
-    
+
     return get_flexslider_query( $args );
 }
 
 /**
  * Register the plugin shortcode
- * 
+ *
  * @since 0.5
  */
 function register_shortcodes() {
@@ -155,7 +93,7 @@ function get_flexslider_query( $args = '' ) {
         'posts_per_page' => 5,
         'orderby' => 'date',
         'order' => 'DESC',
-        'image_size' => 'thumbnail',
+        'image_size' => 'medium',
         'image_link' => 1,
         'show_caption' => 'none',
         'show_content' => 'none'

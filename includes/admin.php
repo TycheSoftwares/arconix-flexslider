@@ -1,4 +1,64 @@
 <?php
+/**
+ * Returns registered image sizes.
+ *
+ * @global array $_wp_additional_image_sizes Additionally registered image sizes
+ * @return array Two-dimensional, with width, height and crop sub-keys
+ * @since 0.1
+ */
+function get_image_sizes() {
+
+    global $_wp_additional_image_sizes;
+    $additional_sizes = array();
+
+    $builtin_sizes = array(
+	'thumbnail' => array(
+	    'width' => get_option( 'thumbnail_size_w' ),
+	    'height' => get_option( 'thumbnail_size_h' ),
+	    'crop' => get_option( 'thumbnail_crop' ),
+	),
+        'medium' => array(
+	    'width' => get_option( 'medium_size_w' ),
+	    'height' => get_option( 'medium_size_h' ),
+	),
+        'large' => array(
+	    'width' => get_option( 'large_size_w' ),
+	    'height' => get_option( 'large_size_h' ),
+	)
+    );
+
+    if( $_wp_additional_image_sizes )
+	$additional_sizes = $_wp_additional_image_sizes;
+
+    return array_merge( $builtin_sizes, $additional_sizes );
+}
+
+/**
+ * Return a modified list of Post Types
+ *
+ * @return type array Post Types
+ * @since 0.1
+ * @version 0.5
+ */
+function get_modified_post_type_list() {
+    $post_types = get_post_types( '', 'names' );
+
+    /* Post types we want excluded from the drop down */
+    $excl_post_types = apply_filters( 'acfs_exclude_post_types',
+        array(
+            'revision',
+            'nav_menu_item',
+            'wpcf7_contact_form'
+        )
+    );
+
+    /** Loop through and exclude the items in the list */
+    foreach( $excl_post_types as $excl_post_type ) {
+        if( isset( $post_types[$excl_post_type] ) ) unset( $post_types[$excl_post_type] );
+    }
+
+    return $post_types;
+}
 
 /**
  * Register the dashboard widget
