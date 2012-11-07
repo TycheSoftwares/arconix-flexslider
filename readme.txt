@@ -27,9 +27,14 @@ Upgrade normally via your Wordpress admin -> Plugins panel.
 
 == Frequently Asked Questions ==
 
-= Where can I find more information on how to use the plugin? =
+= How do I use the slider?  =
 
-* Visit the plugin's [Wiki Page](http://arcnx.co/afswiki "Arconix FlexSlider Wiki") for documentation on the widget
+* Place the Arconix - Flexslider widget in the desired widget area
+* Use the shortcode `[ac-flexslider]` on a post, page or other area
+* Place `<?php echo do_shortcode( "[ac-flexslider]" ); ?>` in the desired page template
+
+= Is there any other documentation? =
+* Visit the plugin's [Wiki Page](http://arcnx.co/afswiki) for all the plugin's documentation
 * Tutorials on advanced plugin usage can be found at [Arconix Computers](http://arconixpc.com/tag/arconix-flexslider)
 
 = What is responsive design? =
@@ -38,13 +43,13 @@ Responsive design is in essence designing a website to cater to the dimensions o
 = Do I need a responsive theme to use this plugin? =
 Absolutely not. The slider will conform to the dimensions provided to it
 
-= I have a problem or I found a bug =
+= I have a problem or a bug =
 
-Check out the WordPress [support forum](http://arcnx.co/afshelp)
+* Check out the WordPress [support forum](http://arcnx.co/afshelp) or the [Issues section on Github](https://github.com/j-gardner/arconix-flexslider/issues)
 
-= Can you add this feature or that option? =
+= I have a great idea for your plugin! =
 
-I can certainly look into it. Contact me through [Twitter](http://arcnx.co/twitter), [Facebook](http://arcnx.co/facebook) or my [Website](http://arcnx.co/1 "Arconix Computers").
+That's fantastic! Feel free to submit a pull request over at [Github](http://arcnx.co/afssource), or you can contact me through [Twitter](http://arcnx.co/twitter), [Facebook](http://arcnx.co/facebook) or my [Website](http://arcnx.co/1).
 
 == Screenshots ==
 1. Widget Options overview
@@ -54,7 +59,7 @@ I can certainly look into it. Contact me through [Twitter](http://arcnx.co/twitt
 == Changelog ==
 
 = 0.5 =
-* Added shortcode support
+* Added ability to call the slider from a shortcode
 * Added the ability to display the chosen post-type's content (either in whole or just the excerpt)
 * Added the option to display just the images without link tags (making the images un-clickable)
 
