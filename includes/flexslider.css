@@ -19,12 +19,19 @@
 .flexslider a:focus { outline: none; }
 
 .slides,
+ul.slides,
+ul.slides li,
 .flex-control-nav,
-.flex-direction-nav {
+.flex-direction-nav,
+ul.flex-control-nav,
+ul.flex-direction-nav,
+.flex-control-nav li,
+.flex-direction-nav li {
+    list-style-type: none !important;
     margin: 0;
     padding: 0;
-    list-style: none;
 }
+
 
 /* Base Styles
 ------------------------------------------------------------ */
@@ -42,7 +49,7 @@
 
 .flexslider .slides img {
     width: inherit; /* ie8 hack */
-    max-width: 100%;  
+    max-width: 100%;
     height: auto !important;
     display: block;
 }
