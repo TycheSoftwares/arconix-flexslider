@@ -53,18 +53,7 @@ function print_scripts() {
  */
 function flexslider_shortcode( $atts, $content = null ) {
 
-    $defaults = array(
-        'post_type' => 'post',
-        'posts_per_page' => 5,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'image_size' => 'medium',
-        'image_link' => 1,
-        'show_caption' => 'none',
-        'show_content' => 'none'
-    );
-
-    $args = shortcode_atts( $defaults, $atts );
+    $args = shortcode_atts( Arconix_FlexSlider::$query_defaults, $atts );
 
     return get_flexslider_query( $args );
 }
@@ -88,19 +77,8 @@ function get_flexslider_query( $args = '' ) {
     /* Load the javascript */
     Arconix_FlexSlider::$load_flex_js = true;
 
-    $defaults = array(
-        'post_type' => 'post',
-        'posts_per_page' => 5,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'image_size' => 'medium',
-        'image_link' => 1,
-        'show_caption' => 'none',
-        'show_content' => 'none'
-    );
-
      /* Parse incomming $args into an array and merge it with $defaults */
-    $args = wp_parse_args( $args, $defaults );
+    $args = wp_parse_args( $args, Arconix_FlexSlider::$query_defaults );
 
     /* Declare each item in $args as its own variable */
     extract( $args, EXTR_SKIP );
