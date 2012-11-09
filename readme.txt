@@ -1,5 +1,6 @@
 === Arconix Flexslider ===
 Contributors: jgardner03
+Donate link: http://arcnx.co/acedonation
 Tags: arconix, flexslider, slider
 Requires at least: 3.4
 Tested up to: 3.4.2
