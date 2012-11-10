@@ -166,7 +166,7 @@ html[xmlns] .slides { display: block; }
 
 .flex-control-nav li {
     display: inline-block;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 15px !important;
     zoom: 1;
 }
 
