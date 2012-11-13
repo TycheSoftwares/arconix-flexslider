@@ -20,15 +20,7 @@ class Arconix_FlexSlider {
      * @var boolean true|false
      * @since 0.5
      */
-    static $load_flex_js;
-    
-    /**
-     * Standardize the query defaults
-     * 
-     * @var array
-     * @since 0.5
-     */
-    static $query_defaults = array();
+    public static $load_flex_js;
 
     /**
      * Constructor
@@ -40,22 +32,10 @@ class Arconix_FlexSlider {
         define( 'ACFS_VERSION', '0.5');
         define( 'ACFS_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFS_INCLUDES_URL', trailingslashit( ACFS_URL . 'includes' ) );
+        define( 'ACFS_JS_URL', trailingslashit( ACFS_INCLUDES_URL . 'js' ) );
         define( 'ACFS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
         define( 'ACFS_INCLUDES_DIR', trailingslashit( ACFS_DIR . 'includes' ) );
 
-        $this->query_defaults = array(
-            'post_type'         => 'post',
-            'category_name'     => '',
-            'tag'               => '',
-            'posts_per_page'    => '5',
-            'orderby'           => 'date',
-            'order'             => 'DESC',
-            'image_size'        => 'medium',
-            'image_link'        => 1,
-            'show_caption'      => 'none',
-            'show_content'      => 'none'
-        );
-        
         $this->hooks();
     }
 
