@@ -24,7 +24,7 @@ Activate Arconix-FlexSlider in the "Plugins" admin panel using the "Activate" li
 
 == Upgrade Notice ==
 
-Upgrade normally via your Wordpress admin -> Plugins panel.
+Upgrade normally via your WordPress admin -> Plugins panel.
 
 == Frequently Asked Questions ==
 
