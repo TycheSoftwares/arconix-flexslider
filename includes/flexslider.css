@@ -10,7 +10,6 @@
 */
 
 
-
 /* Browser Resets
 ------------------------------------------------------------ */
 .flex-container a:active,
@@ -19,19 +18,12 @@
 .flexslider a:focus { outline: none; }
 
 .slides,
-ul.slides,
-ul.slides li,
 .flex-control-nav,
-.flex-direction-nav,
-ul.flex-control-nav,
-ul.flex-direction-nav,
-.flex-control-nav li,
-.flex-direction-nav li {
-    list-style-type: none !important;
+.flex-direction-nav {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
-
 
 /* Base Styles
 ------------------------------------------------------------ */
@@ -77,7 +69,6 @@ html[xmlns] .slides { display: block; }
 .flexslider_widget {
     margin-bottom: 10px;
 }
-
 
 /* FlexSlider Default Style
 ------------------------------------------------------------ */
@@ -126,6 +117,30 @@ html[xmlns] .slides { display: block; }
     left: 0;
 }
 
+/* Content
+------------------------------------------------------------ */
+.flex-image-wrap {
+    float: right;
+    width: 50%
+}
+
+.flex-content-wrap {
+    float: left;
+    width: 50%;
+}
+
+.flex-title {
+    font-size: 28px;
+    padding-left: 10px;
+}
+
+.flex-content {
+    margin-top: 15px;
+    padding: 0 15px 10px 10px;
+}
+
+
+
 /* Direction Nav
 ------------------------------------------------------------ */
 .flex-direction-nav { height: 0; }
@@ -134,7 +149,7 @@ html[xmlns] .slides { display: block; }
     background: url(../images/nav-arrows.png) no-repeat;
     cursor: pointer;
     display: block;
-    margin: -13px 0 0;
+    margin: -13px -25px 0;
     text-indent: -999em;
     width: 35px;
     height: 35px;
@@ -166,7 +181,7 @@ html[xmlns] .slides { display: block; }
 
 .flex-control-nav li {
     display: inline-block;
-    margin: 0 0 0 15px !important;
+    margin: 0 0 0 5px;
     zoom: 1;
 }
 
