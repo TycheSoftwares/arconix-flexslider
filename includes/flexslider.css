@@ -19,10 +19,13 @@
 
 .slides,
 .flex-control-nav,
-.flex-direction-nav {
+.flex-direction-nav,
+.slides li,
+.flex-control-nav li, 
+.flex-direction-nav li {
     margin: 0;
     padding: 0;
-    list-style: none;
+    list-style: none !important;
 }
 
 /* Base Styles
