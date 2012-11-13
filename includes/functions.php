@@ -5,26 +5,27 @@
  * These files can be overwritten by including files in your theme's directory
  *
  * @since 0.1
+ * @version 0.5
  */
 function load_scripts() {
-    wp_register_script( 'flexslider', ACFS_INCLUDES_URL . 'js/jquery.flexslider-min.js', array( 'jquery' ), '1.8', true );
+    wp_register_script( 'flexslider', ACFS_JS_URL . 'jquery.flexslider-min.js', array( 'jquery' ), '1.8', true );
 
     /* Allow user to override javascript by including his own */
-    if( file_exists( get_stylesheet_directory() . "/arconix-flexslider.js" ) ) {
+    if( file_exists( get_stylesheet_directory() . '/arconix-flexslider.js' ) ) {
 	wp_register_script( 'arconix-flexslider-js', get_stylesheet_directory_uri() . '/arconix-flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
     }
-    elseif( file_exists( get_template_directory() . "/arconix-flexslider.js" ) ) {
+    elseif( file_exists( get_template_directory() . '/arconix-flexslider.js' ) ) {
 	wp_register_script( 'arconix-flexslider-js', get_template_directory_uri() . '/arconix-flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
     }
     else {
-	wp_register_script( 'arconix-flexslider-js', ACFS_INCLUDES_URL . 'js/flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
+	wp_register_script( 'arconix-flexslider-js', ACFS_JS_URL . 'flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
     }
 
     /* Allow user to override css by including his own */
-    if( file_exists( get_stylesheet_directory() . "/arconix-flexslider.css" ) ) {
+    if( file_exists( get_stylesheet_directory() . '/arconix-flexslider.css' ) ) {
 	wp_enqueue_style( 'arconix-flexslider', get_stylesheet_directory_uri() . '/arconix-flexslider.css', array(), ACFS_VERSION );
     }
-    elseif( file_exists( get_template_directory() . "/arconix-flexslider.css" ) ) {
+    elseif( file_exists( get_template_directory() . '/arconix-flexslider.css' ) ) {
 	wp_enqueue_style( 'arconix-flexslider', get_template_directory_uri() . '/arconix-flexslider.css', array(), ACFS_VERSION );
     }
     else {
@@ -53,7 +54,20 @@ function print_scripts() {
  */
 function flexslider_shortcode( $atts, $content = null ) {
 
-    $args = shortcode_atts( Arconix_FlexSlider::$query_defaults, $atts );
+    $query_defaults = array(
+        'post_type' => 'post',
+        'category_name' => '',
+        'tag' => '',
+        'posts_per_page' => '5',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'image_size' => 'medium',
+        'image_link' => 1,
+        'show_caption' => 'none',
+        'show_content' => 'none'
+    );
+
+    $args = shortcode_atts( $query_defaults, $atts );
 
     return get_flexslider_query( $args );
 }
@@ -78,7 +92,19 @@ function get_flexslider_query( $args = '' ) {
     Arconix_FlexSlider::$load_flex_js = true;
 
      /* Parse incomming $args into an array and merge it with $defaults */
-    $args = wp_parse_args( $args, Arconix_FlexSlider::$query_defaults );
+    $query_defaults = array(
+        'post_type' => 'post',
+        'category_name' => '',
+        'tag' => '',
+        'posts_per_page' => '5',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'image_size' => 'medium',
+        'image_link' => 1,
+        'show_caption' => 'none',
+        'show_content' => 'none'
+    );
+    $args = wp_parse_args( $args, $query_defaults );
 
     /* Declare each item in $args as its own variable */
     extract( $args, EXTR_SKIP );
@@ -103,6 +129,9 @@ function get_flexslider_query( $args = '' ) {
         while ( $fquery->have_posts() ) : $fquery->the_post();
 
             $return .= '<li>';
+
+            if( 'none' != $show_content )
+                $return .= '<div class="flex-image-wrap">';
 
             if( $image_link )
                 $return .= '<a href="' . get_permalink() . '" rel="bookmark">';
@@ -130,6 +159,9 @@ function get_flexslider_query( $args = '' ) {
 
             if( $image_link )
                 $return .= '</a>';
+
+            if( 'none' != $show_content )
+                $return .= '</div>';
 
             if( 'none' != $show_content ) {
                 $return .= '<div class="flex-content-wrap">';
@@ -168,9 +200,7 @@ function get_flexslider_query( $args = '' ) {
  * @since 0.5
  */
 function flexslider_query( $args = '' ) {
-    $flex = get_flexslider_query( $args );
-
-    echo $flex;
+    echo get_flexslider_query( $args );
 }
 
 ?>
