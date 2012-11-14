@@ -48,7 +48,7 @@ class Arconix_FlexSlider {
     function hooks() {
         add_action( 'wp_enqueue_scripts', 'load_scripts' );
         add_action( 'init', 'register_shortcodes' );
-        add_action( 'widgets_init', 'register_acfs_widget' );
+        add_action( 'widgets_init', 'create_widget' );
         add_action( 'wp_dashboard_setup', 'register_dashboard_widget' );
         add_action( 'wp_footer', 'print_scripts' );
 
