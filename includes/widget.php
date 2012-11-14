@@ -183,7 +183,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 		<?php
 		$captions = array( 'none', 'post title', 'image title', 'image caption' );
 		foreach( $captions as $caption )
-		    echo '<option value="' . esc_attr( $caption ) . '" ' . selected( $caption, $instance['show_caption'], FALSE ) . '>' . esc_html( $caption ) . '</option>';
+		    echo '<option value="' . $caption . '" ' . selected( $caption, $instance['show_caption'], FALSE ) . '>' . $caption . '</option>';
 		?>
 	    </select>
 	</p>
