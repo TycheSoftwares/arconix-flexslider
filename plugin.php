@@ -1,8 +1,9 @@
 <?php
 /*
-  Plugin Name: Arconix FlexSlider Dev
+  Plugin Name: Arconix FlexSlider
   Plugin URI: http://www.arconixpc.com/plugins/arconix-flexslider
   Description: A featured slider using WooThemes FlexSlider script.
+
   Author: John Gardner
   Author URI: http://www.arconixpc.com
 
