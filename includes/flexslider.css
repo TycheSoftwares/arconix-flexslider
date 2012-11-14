@@ -20,8 +20,9 @@
 .slides,
 .flex-control-nav,
 .flex-direction-nav,
-.slides li,
-.flex-control-nav li, 
+ul.slides,
+ul.slides li,
+.flex-control-nav li,
 .flex-direction-nav li {
     margin: 0;
     padding: 0;
@@ -76,12 +77,6 @@ html[xmlns] .slides { display: block; }
 /* FlexSlider Default Style
 ------------------------------------------------------------ */
 .flexslider {
-    background: #fff;
-    border: 4px solid #fff;
-    -webkit-border-radius: 5px;
-       -moz-border-radius: 5px;
-         -o-border-radius: 5px;
-            border-radius: 5px;
     position: relative;
     zoom: 1;
 }
