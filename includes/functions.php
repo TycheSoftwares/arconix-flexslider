@@ -53,7 +53,6 @@ function print_scripts() {
  * @since 0.5
  */
 function flexslider_shortcode( $atts, $content = null ) {
-
     $query_defaults = array(
         'post_type' => 'post',
         'category_name' => '',
@@ -172,9 +171,11 @@ function get_flexslider_query( $args = '' ) {
                     case 'content':
                         $return .= get_the_content();
                         break;
+                    
                     case 'excerpt':
                         $return .= get_the_excerpt();
                         break;
+                    
                     default: // just in case
                         break;
                 }
