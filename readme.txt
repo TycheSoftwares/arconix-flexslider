@@ -38,15 +38,18 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 * Visit the plugin's [Wiki Page](http://arcnx.co/afswiki) for all the plugin's documentation
 * Tutorials on advanced plugin usage can be found at [Arconix Computers](http://arconixpc.com/tag/arconix-flexslider)
 
+= The slider isn't styled properly =
+* With no 2 themes exactly alike, it's extremely difficult to style a plugin that seamlessly integrates without issue. That's why I made the plugin flexible -- If you'd like tighter integration between your theme and the flexslider, copy `includes/flexslider.css` to the root of your theme's folder and rename it to `arconix-flexslider.css`. My plugin will try to load that file first, which means you can make your changes and not risk losing them on a plugin upgrade.
+
 = What is responsive design? =
 Responsive design is in essence designing a website to cater to the dimensions of the user's device. It has become very popular with the proliferation of web-enabled smartphones and tablets.
 
 = Do I need a responsive theme to use this plugin? =
 Absolutely not. The slider will conform to the dimensions provided to it
 
-= I have a problem or a bug =
+= I need help, or I found a bug =
 
-* Check out the WordPress [support forum](http://arcnx.co/afshelp) or the [Issues section on Github](https://github.com/j-gardner/arconix-flexslider/issues)
+* Check out the WordPress [support forum](http://arcnx.co/afshelp) or the [Issues section on Github](http://arcnx.co/afsissues)
 
 = I have a great idea for your plugin! =
 
