@@ -29,15 +29,22 @@ class Arconix_FlexSlider {
      * @since 0.5
      */
     function __construct() {
+        $this->constants();
+        $this->hooks();
+    }
 
+    /**
+     * Define the constants
+     *
+     * @since 0.5
+     */
+    function constants() {
         define( 'ACFS_VERSION', '0.5');
         define( 'ACFS_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFS_INCLUDES_URL', trailingslashit( ACFS_URL . 'includes' ) );
         define( 'ACFS_JS_URL', trailingslashit( ACFS_INCLUDES_URL . 'js' ) );
         define( 'ACFS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
         define( 'ACFS_INCLUDES_DIR', trailingslashit( ACFS_DIR . 'includes' ) );
-
-        $this->hooks();
     }
 
     /**
