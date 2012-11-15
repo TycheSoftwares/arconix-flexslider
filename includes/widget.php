@@ -32,16 +32,16 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
     function __construct() {
 
 	$this->defaults = array(
-	    'post_type' => 'post',
-            'category_name' => '',
-            'tag' => '',
-            'posts_per_page' => '5',
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'image_size' => 'medium',
-            'image_link' => 0,
-            'show_caption' => 'none',
-            'show_content' => 'none'
+	    'post_type'         => 'post',
+            'category_name'     => '',
+            'tag'               => '',
+            'posts_per_page'    => '5',
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'image_size'        => 'medium',
+            'image_link'        => 0,
+            'show_caption'      => 'none',
+            'show_content'      => 'none'
         );
 
         $widget_ops = array(
@@ -123,7 +123,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 	</p>
         <!-- Post Type: Select Box -->
 	<p>
-	    <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Content Type', 'acfs' ); ?>:</label>
+	    <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type', 'acfs' ); ?>:</label>
 	    <select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
 		<?php
 		$types = get_modified_post_type_list();
