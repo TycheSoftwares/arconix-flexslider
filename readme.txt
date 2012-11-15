@@ -66,6 +66,7 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 * Added ability to call the slider from a shortcode
 * Added the ability to display the chosen post-type's content (either in whole or just the excerpt)
 * Added the option to display just the images without link tags (making the images un-clickable)
+* Added the ability to display specific categories or tags (works with 'posts' only)
 
 = 0.2.1 =
 * fixed ie8 image scale issue
