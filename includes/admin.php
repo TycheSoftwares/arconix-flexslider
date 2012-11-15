@@ -89,9 +89,9 @@ function dashboard_widget_output() {
 
     echo '<div class="acfs-widget-bottom"><ul>';
     ?>
-        <li><a href="http://arcnx.co/afswiki"><img src="<?php echo ACFS_IMAGES_URL . 'page-16x16.png'; ?>">Wiki Page</a></li>
+        <li><a href="http://arcnx.co/afswiki"><img src="<?php echo ACFS_IMAGES_URL . 'page-16x16.png'; ?>">Documentation</a></li>
         <li><a href="http://arcnx.co/afshelp"><img src="<?php echo ACFS_IMAGES_URL . 'help-16x16.png'; ?>">Support Forum</a></li>
-        <li><a href="http://arcnx.co/aftrello"><img src="<?php echo ACFS_IMAGES_URL . 'trello-16x16.png'; ?>">Dev Board</a></li>
+        <li><a href="http://arcnx.co/afstrello"><img src="<?php echo ACFS_IMAGES_URL . 'trello-16x16.png'; ?>">Dev Board</a></li>
         <li><a href="http://arcnx.co/afssource"><img src="<?php echo ACFS_IMAGES_URL . 'github-16x16.png'; ?>">Source Code</a></li>
     <?php
     echo '</ul></div></div>';
