@@ -32,16 +32,17 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
     function __construct() {
 
 	$this->defaults = array(
-	    'title'             => '',
-	    'post_type'         => 'post',
-            'posts_per_page'    => 5,
-            'orderby'           => 'date',
-            'order'             => 'DESC',
-            'image_size'        => 'thumbnail',
-            'image_link'        => 0,
-            'show_caption'      => 'none',
-            'show_content'      => 'none'
-	);
+	    'post_type' => 'post',
+            'category_name' => '',
+            'tag' => '',
+            'posts_per_page' => '5',
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'image_size' => 'medium',
+            'image_link' => 0,
+            'show_caption' => 'none',
+            'show_content' => 'none'
+        );
 
         $widget_ops = array(
             'classname'         => 'flexslider_widget',
@@ -82,8 +83,6 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 
         /* After widget (defined by themes) */
         echo $after_widget;
-
-
     }
 
     /**
@@ -99,7 +98,8 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         $instance = $old_instance;
 	$instance['title'] = strip_tags( $new_instance['title'] );
 	$instance['posts_per_page'] = (int) $new_instance['posts_per_page'];
-        //$instance['image_link'] = !empty( $new_instance['image_link'] ) ? 1 : 0;
+        $instance['category_name'] = strip_tags( $new_instance['category_name'] );
+        $instance['tag'] = strip_tags( $new_instance['tag'] );
 
 	return $new_instance;
     }
@@ -112,19 +112,18 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * @version 0.5
      */
     function form( $instance ) {
-
-	/* Merge with defaults */
+        /* Merge with defaults */
 	$instance = wp_parse_args( (array) $instance, $this->defaults );
 	?>
 
 	<!-- Title: Input Box -->
 	<p>
 	    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'acfs' ); ?>:</label>
-	    <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+	    <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 	</p>
-	<!-- Post Type: Select Box -->
+        <!-- Post Type: Select Box -->
 	<p>
-	    <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type', 'acfs' ); ?>:</label>
+	    <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Content Type', 'acfs' ); ?>:</label>
 	    <select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
 		<?php
 		$types = get_modified_post_type_list();
@@ -135,8 +134,18 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         </p>
         <!-- Posts Number: Input Box -->
 	<p>
-	    <label for="<?php echo esc_attr( $this->get_field_id( 'posts_per_page' ) ); ?>"><?php _e( 'Number of posts to show:', 'acfs' ); ?></label>
-	    <input id="<?php echo esc_attr( $this->get_field_id( 'posts_per_page' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'posts_per_page' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['posts_per_page'] ); ?>" size="3" /></p>
+	    <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Number of items to show:', 'acfs' ); ?></label>
+	    <input id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text" value="<?php echo $instance['posts_per_page']; ?>" size="3" /></p>
+	</p>
+        <!-- Category: Input Box -->
+	<p>
+	    <label for="<?php echo $this->get_field_id( 'category_name' ); ?>"><?php _e( 'Show posts only from a specific category or comma separated categories (use the slug form)', 'acfs' ); ?>:</label>
+	    <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'category_name' ); ?>" name="<?php echo $this->get_field_name( 'category_name' ); ?>" value="<?php echo $instance['category_name']; ?>" />
+	</p>
+        <!-- Tag: Input Box -->
+	<p>
+	    <label for="<?php echo $this->get_field_id( 'tag' ); ?>"><?php _e( 'Show posts only from a specific tag or comma separated tags (use the slug form)', 'acfs' ); ?>:</label>
+	    <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 	</p>
         <!-- Orderby: Select Box -->
 	<p>
@@ -174,7 +183,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         <!-- Image Link: Checkbox -->
         <p>
             <input id="<?php echo $this->get_field_id( 'image_link' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'image_link' ); ?>" value="1"<?php checked( $instance['image_link'] ); ?> />
-            <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php _e( 'Hyperlink the image to permalink', 'acfs' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php _e( 'Hyperlink image to the permalink', 'acfs' ); ?></label>
         </p>
         <!-- Show Caption: Select Box -->
 	<p>
@@ -198,13 +207,8 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 		?>
 	    </select>
 	</p>
-
-
-
-	<?php
+        <?php
     }
 
-
 }
-
 ?>
