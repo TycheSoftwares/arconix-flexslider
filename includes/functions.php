@@ -116,6 +116,9 @@ function get_flexslider_query( $args = '' ) {
         'meta_key' => '_thumbnail_id' // Should pull only content with featured images
     );
 
+    /* Allow the query args to be filtered */
+    $query_args = apply_filters( 'arconix_flexslider_query_args', $query_args );
+
     $fquery = new WP_Query( $query_args );
 
     $return = '';
@@ -171,11 +174,11 @@ function get_flexslider_query( $args = '' ) {
                     case 'content':
                         $return .= get_the_content();
                         break;
-                    
+
                     case 'excerpt':
                         $return .= get_the_excerpt();
                         break;
-                    
+
                     default: // just in case
                         break;
                 }
