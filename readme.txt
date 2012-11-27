@@ -62,6 +62,9 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 
 == Changelog ==
 
+= 0.5.2 =
+* Fixed an error with the Widget Title that was preventing it from saving.
+
 = 0.5.1 =
 * Added a filter to the flexslider script registration, allowing the use of a different flexslider script than what's supplied in the plugin
 
