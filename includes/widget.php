@@ -178,6 +178,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
             foreach( (array) $sizes as $name => $size )
                 echo '<option value="' . $name . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . esc_html( $name ) . ' ( ' . $size['width'] . 'x' . $size['height'] . ' )</option>';
             ?>
+            <option value="full" ' <?php echo selected( "full", $instance['image_size'], FALSE ); ?> '>Full Size</option>
             </select>
         </p>
             <!-- Image Link: Checkbox -->
