@@ -59,7 +59,7 @@ class Arconix_FlexSlider_Admin {
         // Provide script registration args so they can be filtered if necessary
         $script_args = apply_filters( 'arconix_flexslider_reg', array(
             'url' => ACFS_URL . 'js/jquery.flexslider-min.js',
-            'ver' => '1.8',
+            'ver' => '2.2.2',
             'dep' => 'jquery'
         ) );
 
