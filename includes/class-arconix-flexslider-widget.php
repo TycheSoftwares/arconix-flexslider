@@ -1,14 +1,5 @@
 <?php
 /**
- * Register the Slider Widget
- *
- * @since 0.1
- */
-function acfs_create_widget() {
-    register_widget( 'Arconix_FlexSlider_Widget' );
-}
-
-/**
  * FlexSlider Widget
  *
  * @since 0.1
@@ -21,18 +12,19 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * @var array
      * @since 0.1
      */
-    protected $defaults;
+    protected $defaults = array();
 
     /**
-     * Constructor. Set the default widget options, create widget, and load the js
+     * Constructor. Set the default widget options and create the widget
      *
      * @since 0.1
      * @version 0.5
      */
     function __construct() {
 
-    $this->defaults = array(
-        'post_type'         => 'post',
+        $this->defaults = array(
+            'title'             => '',
+            'post_type'         => 'post',
             'category_name'     => '',
             'tag'               => '',
             'posts_per_page'    => '5',
@@ -46,87 +38,88 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 
         $widget_ops = array(
             'classname'         => 'flexslider_widget',
-            'description'       => __( 'Responsive slider able to showcase any post type', 'acfs' ),
+            'description'       => __( 'Responsive slider able to showcase any post type', 'acfs' )
         );
 
-        $control_ops = array(
-        'id_base'           => 'arconix-flexslider-widget'
-    );
-
-        $this->WP_Widget( 'arconix-flexslider-widget', 'Arconix - FlexSlider', $widget_ops, $control_ops );
+        parent::__construct( 'arconix-flexslider', __( 'Arconix Flexslider', 'acfs' ), $widget_ops );
     }
 
     /**
      * Widget Output
      *
-     * @param type $args Display arguments including before_title, after_title, before_widget, and after_widget.
-     * @param type $instance The settings for the particular instance of the widget
+     * @param type $args        Display arguments including before_title, after_title, before_widget, and after_widget.
+     * @param type $instance    The settings for the particular instance of the widget
+     * 
      * @since 0.1
      * @version 0.5
      */
     function widget( $args, $instance ) {
 
-    extract( $args, EXTR_SKIP );
+        extract( $args, EXTR_SKIP );
 
-    /* Merge with defaults */
-    $instance = wp_parse_args( ( array )$instance, $this->defaults );
+        // Merge with defaults
+        $instance = wp_parse_args( $instance, $this->defaults );
 
-    /* Before widget (defined by themes) */
-    echo $before_widget;
+        // Before widget (defined by themes)
+        echo $before_widget;
 
-    /* Title of widget (before and after defined by themes) */
-    if( ! empty( $instance['title'] ) )
-        echo $before_title . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $after_title;
+        // Title of widget (before and after defined by themes)
+        if( ! empty( $instance['title'] ) )
+            echo $before_title . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $after_title;
 
-        /* Run our query and output our results */
-        flexslider_query( $instance );
+        // Run our query and output our results
+        $fs = new Arconix_FlexSlider();
+        $fs->loop( $instance, true );
 
-        /* After widget (defined by themes) */
+        // After widget (defined by themes)
         echo $after_widget;
     }
 
     /**
      * Update a particular instance.
      *
-     * @param array $new_instance New settings for this instance as input by the user via form()
-     * @param array $old_instance Old settings for this instance
-     * @return array Settings to save or bool false to cancel saving
+     * @param array $new_instance   New settings for this widget as input by the user via form()
+     * @param array $old_instance   Existing settings for this widget
+     * 
+     * @return array    Settings to save or bool false to cancel saving
+     * 
      * @since 0.1
      * @version 0.5
      */
     function update( $new_instance, $old_instance ) {
-        $instance = array();
+        $instance = $old_instance;
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['posts_per_page'] = absint( $new_instance['posts_per_page'] );
         $instance['category_name'] = strip_tags( $new_instance['category_name'] );
         $instance['tag'] = strip_tags( $new_instance['tag'] );
 
-    return $new_instance;
+        return $instance;
     }
 
     /**
      * Widget form
      *
      * @param array $instance Current settings
+     * 
      * @since 0.1
      * @version 0.5
      */
     function form( $instance ) {
-        /* Merge with defaults */
-        $instance = wp_parse_args( (array) $instance, $this->defaults );
-        ?>
+
+        // Merge with defaults
+        $instance = wp_parse_args( $instance, $this->defaults ); ?>
 
         <!-- Title: Input Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'acfs' ); ?>:</label>
-            <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
+            <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat" />
         </p>
             <!-- Post Type: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type', 'acfs' ); ?>:</label>
             <select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
             <?php
-            $types = get_modified_post_type_list();
+            $types = $this->get_modified_post_type_list();
             foreach( $types as $type )
                 echo '<option value="' . $type . '" ' . selected( $type, $instance['post_type'], FALSE ) . '>' . $type . '</option>';
             ?>
@@ -174,11 +167,11 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'image_size' ); ?>"><?php _e( 'Image Size', 'acfs' ); ?>:</label>
             <select id="<?php echo $this->get_field_id( 'image_size' ); ?>" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
             <?php
-            $sizes = get_image_sizes();
-            foreach( (array) $sizes as $name => $size )
+            $sizes = $this->get_image_sizes();
+            foreach( $sizes as $name => $size )
                 echo '<option value="' . $name . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . esc_html( $name ) . ' ( ' . $size['width'] . 'x' . $size['height'] . ' )</option>';
             ?>
-            <option value="full" ' <?php echo selected( "full", $instance['image_size'], FALSE ); ?> '>Full Size</option>
+            <option value="full" ' <?php echo selected( "full", $instance['image_size'], FALSE ); ?> '><?php __( 'Full Size', 'acfs' ); ?></option>
             </select>
         </p>
             <!-- Image Link: Checkbox -->
@@ -211,5 +204,71 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         <?php
     }
 
+
+    /**
+     * Returns registered image sizes.
+     *
+     * @global array $_wp_additional_image_sizes Additionally registered image sizes
+     * @return array Two-dimensional, with width, height and crop sub-keys
+     * @since 0.1
+     */
+    function get_image_sizes() {
+
+        global $_wp_additional_image_sizes;
+        $additional_sizes = array();
+
+        $builtin_sizes = array(
+            'thumbnail' => array(
+                'width' => get_option( 'thumbnail_size_w' ),
+                'height' => get_option( 'thumbnail_size_h' ),
+                'crop' => get_option( 'thumbnail_crop' ),
+            ),
+            'medium' => array(
+                'width' => get_option( 'medium_size_w' ),
+                'height' => get_option( 'medium_size_h' ),
+            ),
+            'large' => array(
+                'width' => get_option( 'large_size_w' ),
+                'height' => get_option( 'large_size_h' ),
+            )
+        );
+
+        if( $_wp_additional_image_sizes )
+        $additional_sizes = $_wp_additional_image_sizes;
+
+        return array_merge( $builtin_sizes, $additional_sizes );
+    }
+
+    /**
+     * Return a modified list of Post Types
+     *
+     * This function is primarily geared towards developers who do work for clients and want to restrict
+     * the post types visible in the widget drop down. The default list includes the 2 WordPress post
+     * types plus the post type for the popular plugin Contact Form 7. The list can be filtered to 
+     * add any other desired post types
+     *
+     * @return type array Post Types
+     * @since 0.1
+     * @version 0.5
+     */
+    function get_modified_post_type_list() {
+        $post_types = get_post_types( '', 'names' );
+
+        /* Post types we want excluded from the drop down */
+        $excl_post_types = apply_filters( 'acfs_exclude_post_types',
+            array(
+                'revision',
+                'nav_menu_item',
+                'wpcf7_contact_form'
+            )
+        );
+
+        /** Loop through and exclude the items in the list */
+        foreach( $excl_post_types as $excl_post_type ) {
+            if( isset( $post_types[$excl_post_type] ) ) unset( $post_types[$excl_post_type] );
+        }
+
+        return $post_types;
+    }
+
 }
-?>
