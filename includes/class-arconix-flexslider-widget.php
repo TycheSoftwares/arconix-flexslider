@@ -25,6 +25,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
 
         $this->defaults = array(
             'title'             => '',
+            'type'              => 'slider',
             'post_type'         => 'post',
             'category_name'     => '',
             'tag'               => '',
@@ -114,6 +115,18 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'acfs' ); ?>:</label>
             <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat" />
+        </p>
+
+        <!-- Slider Type: Select Box -->
+        <p>
+            <label for="<?php echo $this->get_field_id( 'type' ); ?>"><?php _e( 'Slider Type', 'acfs' ); ?></label>
+            <select id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>">
+                <?php
+                $content_items = array( 'slider', 'carousel' );
+                foreach( $content_items as $content_item )
+                    echo '<option value="' . $content_item . '" ' . selected( $content_item, $instance['type'], FALSE ) . '>' . $content_item . '</option>';
+                ?>
+            </select>
         </p>
 
         <!-- Post Type: Select Box -->

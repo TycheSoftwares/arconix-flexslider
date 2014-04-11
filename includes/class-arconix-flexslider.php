@@ -20,6 +20,7 @@ class Arconix_FlexSlider {
      */
     function defaults() {
         $d = array(
+            'type'              => 'slider',
             'post_type'         => 'post',
             'category_name'     => '',
             'tag'               => '',
@@ -68,8 +69,7 @@ class Arconix_FlexSlider {
         $return = '';
 
         if ( $fquery->have_posts() ) {
-            $return .= '<div class="flex-container">
-                <div class="flexslider">
+            $return .= '<div class="arconix-flexslider-' . $type . '"><div class="flexslider">
                 <ul class="slides">';
 
             while ( $fquery->have_posts() ) : $fquery->the_post();
