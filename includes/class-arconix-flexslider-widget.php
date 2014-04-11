@@ -114,72 +114,81 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'acfs' ); ?>:</label>
             <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat" />
         </p>
-            <!-- Post Type: Select Box -->
+
+        <!-- Post Type: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type', 'acfs' ); ?>:</label>
             <select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
-            <?php
-            $types = $this->get_modified_post_type_list();
-            foreach( $types as $type )
-                echo '<option value="' . $type . '" ' . selected( $type, $instance['post_type'], FALSE ) . '>' . $type . '</option>';
-            ?>
+                <?php
+                $types = $this->get_modified_post_type_list();
+                foreach( $types as $type )
+                    echo '<option value="' . $type . '" ' . selected( $type, $instance['post_type'], FALSE ) . '>' . $type . '</option>';
+                ?>
             </select>
-            </p>
-            <!-- Posts Number: Input Box -->
+        </p>
+
+        <!-- Posts Number: Input Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Number of items to show:', 'acfs' ); ?></label>
             <input id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text" value="<?php echo $instance['posts_per_page']; ?>" size="3" /></p>
         </p>
-            <!-- Category: Input Box -->
+
+        <!-- Category: Input Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'category_name' ); ?>"><?php _e( 'Show posts only from a specific category or comma separated categories (use the slug form)', 'acfs' ); ?>:</label>
             <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'category_name' ); ?>" name="<?php echo $this->get_field_name( 'category_name' ); ?>" value="<?php echo $instance['category_name']; ?>" />
         </p>
-            <!-- Tag: Input Box -->
+
+        <!-- Tag: Input Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'tag' ); ?>"><?php _e( 'Show posts only from a specific tag or comma separated tags (use the slug form)', 'acfs' ); ?>:</label>
             <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'tag' ); ?>" name="<?php echo $this->get_field_name( 'tag' ); ?>" value="<?php echo $instance['tag']; ?>" />
         </p>
-            <!-- Orderby: Select Box -->
+
+        <!-- Orderby: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><?php _e( 'Select Orderby', 'acfs' ); ?></label>
             <select id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
-            <?php
-            $orderby_items = array( 'ID', 'author', 'title', 'name', 'date', 'modified', 'rand', 'comment_count', 'menu_order' );
-            foreach( $orderby_items as $orderby_item )
-                echo '<option value="' . $orderby_item . '" ' . selected( $orderby_item, $instance['orderby'], FALSE ) . '>' . $orderby_item . '</option>';
-            ?>
+                <?php
+                $orderby_items = array( 'ID', 'author', 'title', 'name', 'date', 'modified', 'rand', 'comment_count', 'menu_order' );
+                foreach( $orderby_items as $orderby_item )
+                    echo '<option value="' . $orderby_item . '" ' . selected( $orderby_item, $instance['orderby'], FALSE ) . '>' . $orderby_item . '</option>';
+                ?>
             </select>
         </p>
-            <!-- Order: Select Box -->
+
+        <!-- Order: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php _e( 'Select Order', 'acfs' ); ?></label>
             <select id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
-            <?php
-            $order_items = array( 'ASC', 'DESC' );
-            foreach( $order_items as $order_item )
-                echo '<option value="' . $order_item . '" ' . selected( $order_item, $instance['order'], FALSE ) . '>' . $order_item . '</option>';
-            ?>
+                <?php
+                $order_items = array( 'ASC', 'DESC' );
+                foreach( $order_items as $order_item )
+                    echo '<option value="' . $order_item . '" ' . selected( $order_item, $instance['order'], FALSE ) . '>' . $order_item . '</option>';
+                ?>
             </select>
         </p>
+
         <!-- Image Size: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'image_size' ); ?>"><?php _e( 'Image Size', 'acfs' ); ?>:</label>
             <select id="<?php echo $this->get_field_id( 'image_size' ); ?>" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
-            <?php
-            $sizes = $this->get_image_sizes();
-            foreach( $sizes as $name => $size )
-                echo '<option value="' . $name . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . esc_html( $name ) . ' ( ' . $size['width'] . 'x' . $size['height'] . ' )</option>';
-            ?>
-            <option value="full" ' <?php echo selected( "full", $instance['image_size'], FALSE ); ?> '><?php __( 'Full Size', 'acfs' ); ?></option>
+                <?php
+                $sizes = $this->get_image_sizes();
+                foreach( $sizes as $name => $size )
+                    echo '<option value="' . $name . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . esc_html( $name ) . ' ( ' . $size['width'] . 'x' . $size['height'] . ' )</option>';
+                ?>
+                <option value="full" <?php echo selected( "full", $instance['image_size'], FALSE ); ?> '>' . <?php __( 'Full Size', 'acfs' ); ?></option>
             </select>
         </p>
-            <!-- Image Link: Checkbox -->
-            <p>
-                <input id="<?php echo $this->get_field_id( 'image_link' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'image_link' ); ?>" value="1"<?php checked( $instance['image_link'] ); ?> />
-                <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php _e( 'Hyperlink image to the permalink', 'acfs' ); ?></label>
-            </p>
-            <!-- Show Caption: Select Box -->
+
+        <!-- Image Link: Checkbox -->
+        <p>
+            <input id="<?php echo $this->get_field_id( 'image_link' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'image_link' ); ?>" value="1"<?php checked( $instance['image_link'] ); ?> />
+            <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php _e( 'Hyperlink image to the permalink', 'acfs' ); ?></label>
+        </p>
+
+        <!-- Show Caption: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'show_caption' ); ?>"><?php _e( 'Show caption', 'acfs' ); ?></label>
             <select id="<?php echo $this->get_field_id( 'show_caption' ); ?>" name="<?php echo $this->get_field_name( 'show_caption' ); ?>">
@@ -190,15 +199,16 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
             ?>
             </select>
         </p>
-            <!-- Show Content: Select Box -->
+
+        <!-- Show Content: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'show_content' ); ?>"><?php _e( 'Show content', 'acfs' ); ?></label>
             <select id="<?php echo $this->get_field_id( 'show_content' ); ?>" name="<?php echo $this->get_field_name( 'show_content' ); ?>">
-            <?php
-            $content_items = array( 'none', 'excerpt', 'content' );
-            foreach( $content_items as $content_item )
-                echo '<option value="' . $content_item . '" ' . selected( $content_item, $instance['show_content'], FALSE ) . '>' . $content_item . '</option>';
-            ?>
+                <?php
+                $content_items = array( 'none', 'excerpt', 'content' );
+                foreach( $content_items as $content_item )
+                    echo '<option value="' . $content_item . '" ' . selected( $content_item, $instance['show_content'], FALSE ) . '>' . $content_item . '</option>';
+                ?>
             </select>
         </p>
         <?php
@@ -210,6 +220,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      *
      * @global array $_wp_additional_image_sizes Additionally registered image sizes
      * @return array Two-dimensional, with width, height and crop sub-keys
+     * 
      * @since 0.1
      */
     function get_image_sizes() {
