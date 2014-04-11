@@ -10,6 +10,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * Holds widget settings defaults, populated in constructor.
      *
      * @var array
+     * 
      * @since 0.1
      */
     protected $defaults = array();
@@ -17,8 +18,8 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
     /**
      * Constructor. Set the default widget options and create the widget
      *
-     * @since 0.1
-     * @version 0.5
+     * @since   0.1
+     * @version 1.0.0
      */
     function __construct() {
 
@@ -51,7 +52,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * @param type $instance    The settings for the particular instance of the widget
      * 
      * @since 0.1
-     * @version 0.5
+     * @version 1.0.0
      */
     function widget( $args, $instance ) {
 
@@ -84,7 +85,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * @return array    Settings to save or bool false to cancel saving
      * 
      * @since 0.1
-     * @version 0.5
+     * @version 1.0.0
      */
     function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
@@ -102,7 +103,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * @param array $instance Current settings
      * 
      * @since 0.1
-     * @version 0.5
+     * @version 1.0.0
      */
     function form( $instance ) {
 
@@ -218,6 +219,9 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
     /**
      * Returns registered image sizes.
      *
+     * Gets the image sizes that have been added via `add_image_size()` and merges
+     * them with the WordPress builtin image sizes.
+     *
      * @global array $_wp_additional_image_sizes Additionally registered image sizes
      * @return array Two-dimensional, with width, height and crop sub-keys
      * 
@@ -245,7 +249,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         );
 
         if( $_wp_additional_image_sizes )
-        $additional_sizes = $_wp_additional_image_sizes;
+            $additional_sizes = $_wp_additional_image_sizes;
 
         return array_merge( $builtin_sizes, $additional_sizes );
     }
@@ -258,8 +262,11 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * types plus the post type for the popular plugin Contact Form 7. The list can be filtered to 
      * add any other desired post types
      *
-     * @return type array Post Types
-     * @since 0.1
+     * @example https://gist.github.com/j-gardner/10469315
+     *
+     * @return array modified post_type list
+     * 
+     * @since   0.1
      * @version 0.5
      */
     function get_modified_post_type_list() {

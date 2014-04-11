@@ -1,12 +1,18 @@
 <?php
-
+/**
+ * The Admin Class for Arconix Flexslider
+ *
+ * Handles the backend registration work for scripts, shortcodes and widgets
+ *
+ * @since  1.0.0 
+ */
 class Arconix_FlexSlider_Admin {
 
     /**
      * Constructor
      *
      * @since 0.5
-     * @version  0.6.0
+     * @version  1.0.0
      */
     function __construct() {
         $this->constants();
@@ -20,7 +26,8 @@ class Arconix_FlexSlider_Admin {
     /**
      * Define the constants
      *
-     * @since 0.5
+     * @since    0.5
+     * @version  1.0.0
      */
     function constants() {
         define( 'ACFS_VERSION', '0.5.3');
@@ -52,8 +59,8 @@ class Arconix_FlexSlider_Admin {
      * @link Codex reference: get_template_directory_uri()
      * @link Codex reference: wp_enqueue_style()
      *
-     * @since 0.1
-     * @version 0.5.3
+     * @since   0.1
+     * @version 1.0.0
      */
     function scripts() {
         // Provide script registration args so they can be filtered if necessary
@@ -104,7 +111,9 @@ class Arconix_FlexSlider_Admin {
      *
      * @param type $atts    shortcode arguments
      * @param type $content self-enclosing shortcode
-     * @since 0.5
+     * 
+     * @since    0.5
+     * @version  1.0.0
      */
     function flexslider_shortcode( $atts, $content = null ) {
         // Load the javascript if it hasn't been overridden
@@ -137,7 +146,7 @@ class Arconix_FlexSlider_Admin {
      * Output for the dashboard widget
      *
      * @since 0.1
-     * @version 0.6
+     * @version 1.0.0
      */
     function dashboard_widget_output() {
         echo '<div class="rss-widget">';
