@@ -139,7 +139,9 @@ class Arconix_FlexSlider_Admin {
      * @since 0.1
      */
     function register_dashboard_widget() {
-        wp_add_dashboard_widget( 'ac-flexslider', 'Arconix FlexSlider', array( $this, 'dashboard_widget_output' ) );
+        if( apply_filters( 'pre_register_arconix_flexslider_dashboard_widget', true ) and 
+            apply_filters( 'arconix_flexslider_dashboard_widget_security', current_user_can( 'manage_options' ) ) )
+                wp_add_dashboard_widget( 'ac-flexslider', 'Arconix FlexSlider', array( $this, 'dashboard_widget_output' ) );
     }
 
     /**
