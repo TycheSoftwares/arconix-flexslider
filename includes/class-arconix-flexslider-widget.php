@@ -266,7 +266,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
         $post_types = get_post_types( '', 'names' );
 
         /* Post types we want excluded from the drop down */
-        $excl_post_types = apply_filters( 'acfs_exclude_post_types',
+        $excl_post_types = apply_filters( 'arconix_flexslider_exclude_post_types',
             array(
                 'revision',
                 'nav_menu_item',

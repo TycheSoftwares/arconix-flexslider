@@ -32,7 +32,7 @@ class Arconix_FlexSlider {
             'show_content'      => 'none'
         );
 
-        return apply_filters( 'acfs_query_defaults', $d );
+        return apply_filters( 'arconix_flexslider_function_defaults', $d );
     }
     
     /**
@@ -62,7 +62,7 @@ class Arconix_FlexSlider {
         );
 
         // Allow the query args to be filtered before the query is run
-        $query_args = apply_filters( 'acfs_query_args', $query_args );
+        $query_args = apply_filters( 'arconix_flexslider_loop_args', $query_args );
 
         $fquery = new WP_Query( $query_args );
 
