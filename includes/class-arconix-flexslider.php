@@ -57,8 +57,7 @@ class Arconix_FlexSlider {
             'category_name' => $category_name,
             'tag' => $tag,
             'orderby' => $orderby,
-            'order' => $order,
-            'meta_key' => '_thumbnail_id' // Should pull only content with featured images
+            'order' => $order
         );
 
         // Allow the query args to be filtered before the query is run
