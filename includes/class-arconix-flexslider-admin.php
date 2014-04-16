@@ -21,6 +21,8 @@ class Arconix_FlexSlider_Admin {
         add_action( 'widgets_init',         array( $this, 'widgets' ) );
         add_action( 'init',                 array( $this, 'register_shortcodes' ) );
         add_action( 'wp_dashboard_setup',   array( $this, 'register_dashboard_widget' ) );
+
+        add_shortcode( 'ac-flexslider',     array( $this, 'flexslider_shortcode' ) );
     }
 
     /**
@@ -95,15 +97,6 @@ class Arconix_FlexSlider_Admin {
     }
 
     /**
-     * Register the plugin shortcode
-     *
-     * @since 0.5
-     */
-    function register_shortcodes() {
-        add_shortcode( 'ac-flexslider', array( $this, 'flexslider_shortcode' ) );
-    }
-
-    /**
      * Flexslider Shortcode
      *
      * This shortcode return's the flexslider query lookup. The user can pass any accepted values as an attribute which will
@@ -119,7 +112,7 @@ class Arconix_FlexSlider_Admin {
         // Load the javascript if it hasn't been overridden
         if( wp_script_is( 'arconix-flexslider-js', 'registered' ) ) wp_enqueue_script( 'arconix-flexslider-js' );
 
-        $fs = new Arconix_Flexslider();
+        $fs = new Arconix_Flexslider;
 
         return $fs->loop( $atts );
     }
