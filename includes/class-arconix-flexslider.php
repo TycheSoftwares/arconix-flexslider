@@ -53,12 +53,12 @@ class Arconix_FlexSlider {
         extract( $args, EXTR_SKIP );
 
         $query_args = array(
-            'post_type' => $post_type,
-            'posts_per_page' => $posts_per_page,
-            'category_name' => $category_name,
-            'tag' => $tag,
-            'orderby' => $orderby,
-            'order' => $order
+            'post_type'         => $post_type,
+            'posts_per_page'    => $posts_per_page,
+            'category_name'     => $category_name,
+            'tag'               => $tag,
+            'orderby'           => $orderby,
+            'order'             => $order
         );
 
         // Allow the query args to be filtered before the query is run
@@ -94,15 +94,13 @@ class Arconix_FlexSlider {
                     case 'image title':
                     case 'image-title':
                     case 'imagetitle':
-                        global $post;
-                        $return .= '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $post->ID ) )->post_title . '</p>';
+                        $return .= '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $fquery->ID ) )->post_title . '</p>';
                         break;
 
                     case 'image caption':
                     case 'image-caption':
                     case 'imagecaption':
-                        global $post;
-                        $return .= '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $post->ID ) )->post_excerpt . '</p>';
+                        $return .= '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $fquery->ID ) )->post_excerpt . '</p>';
                         break;
 
                     default:
