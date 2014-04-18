@@ -8,13 +8,13 @@ of the plugin's version and will maintain your changes on upgrade
 */
 jQuery( window ).load( function() {
     // Slider
-    jQuery( 'arconix-flexslider-slider .flexslider' ).flexslider( {
+    jQuery( '.arconix-flexslider-slider .flexslider' ).flexslider( {
         animation:      'slide',
         pauseOnHover:   true,
     } );
 
     // Carousel
-    jQuery( 'arconix-flexslider-carousel .flexslider' ).flexslider( {
+    jQuery( '.arconix-flexslider-carousel .flexslider' ).flexslider( {
         animation:      'slide',
         animationLoop:  false,
         itemWidth:      210,
