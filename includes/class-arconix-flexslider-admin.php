@@ -4,7 +4,7 @@
  *
  * Handles the backend registration work for scripts, shortcodes and widgets
  *
- * @since  1.0.0 
+ * @since  1.0.0
  */
 class Arconix_FlexSlider_Admin {
 
@@ -19,7 +19,6 @@ class Arconix_FlexSlider_Admin {
 
         add_action( 'wp_enqueue_scripts',   array( $this, 'scripts' ) );
         add_action( 'widgets_init',         array( $this, 'widgets' ) );
-        add_action( 'init',                 array( $this, 'register_shortcodes' ) );
         add_action( 'wp_dashboard_setup',   array( $this, 'register_dashboard_widget' ) );
 
         add_shortcode( 'ac-flexslider',     array( $this, 'flexslider_shortcode' ) );
@@ -47,9 +46,9 @@ class Arconix_FlexSlider_Admin {
      * from loading at all, return false to the desired pre_register filters
      *
      * @example add_filter( 'pre_register_arconix_flexslider_js', '__return_false' );
-     * 
+     *
      * If you'd like to modify the Javascript or CSS that is used by the plugin, you can copy the arconix-flexslider.js
-     * or arconix-flexslider.css files to the root of your theme's folder. That will be loaded in place of the plugin's 
+     * or arconix-flexslider.css files to the root of your theme's folder. That will be loaded in place of the plugin's
      * version, which means you can modify it to your heart's content and know the file will be safe when the plugin
      * is updated in the future.
      *
@@ -93,7 +92,7 @@ class Arconix_FlexSlider_Admin {
             else
                 wp_enqueue_style( 'arconix-flexslider', ACFS_URL . 'css/arconix-flexslider.css', false, ACFS_VERSION );
         }
-         
+
     }
 
     /**
@@ -104,7 +103,7 @@ class Arconix_FlexSlider_Admin {
      *
      * @param type $atts    shortcode arguments
      * @param type $content self-enclosing shortcode
-     * 
+     *
      * @since    0.5
      * @version  1.0.0
      */
@@ -132,7 +131,7 @@ class Arconix_FlexSlider_Admin {
      * @since 0.1
      */
     function register_dashboard_widget() {
-        if( apply_filters( 'pre_register_arconix_flexslider_dashboard_widget', true ) and 
+        if( apply_filters( 'pre_register_arconix_flexslider_dashboard_widget', true ) and
             apply_filters( 'arconix_flexslider_dashboard_widget_security', current_user_can( 'manage_options' ) ) )
                 wp_add_dashboard_widget( 'ac-flexslider', 'Arconix FlexSlider', array( $this, 'dashboard_widget_output' ) );
     }
