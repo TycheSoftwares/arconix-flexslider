@@ -1,4 +1,4 @@
-/* 
+/*
 ARCONIX FLEXSLIDER CSS
 --------------------------
 
@@ -7,7 +7,7 @@ Instead, save a copy of this file to your theme or child theme directory. It wil
 loaded in place of the plugin's version and will maintain your changes on upgrade
 
 IMPORTANT NOTE: Since the directory structure will be changing, and image URLS are always loaded
-relative to their current path, the links to the nav arrows in this file will also need to change. 
+relative to their current path, the links to the nav arrows in this file will also need to change.
 For example:
 
     'url(../images ...'
@@ -154,7 +154,7 @@ html[xmlns] .slides { display: block; }
 .flex-direction-nav { height: 0; }
 
 .flex-direction-nav li a {
-    background: url(../images/nav-arrows.png) no-repeat;
+    background: url(images/nav-arrows.png) no-repeat;
     cursor: pointer;
     display: block;
     margin: -13px -25px 0;
@@ -196,7 +196,7 @@ html[xmlns] .slides { display: block; }
 .flex-control-nav li:first-child { margin: 0; }
 
 .flex-control-nav li a {
-    background: url(../images/nav-buttons.png) no-repeat;
+    background: url(images/nav-buttons.png) no-repeat;
     cursor: pointer;
     display: block;
     text-indent: -999em;
@@ -206,7 +206,7 @@ html[xmlns] .slides { display: block; }
 
 .flex-control-nav li a:hover { background-position: 0 -13px; }
 
-.flex-control-nav li a.active {
+.flex-control-nav li a.flex-active {
     background-position: 0 -26px;
     cursor: default;
 }
