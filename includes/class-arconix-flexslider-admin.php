@@ -8,6 +8,8 @@
  */
 class Arconix_FlexSlider_Admin {
 
+    public static $version = '1.0.0';
+
     /**
      * Constructor
      *
@@ -31,7 +33,7 @@ class Arconix_FlexSlider_Admin {
      * @version  1.0.0
      */
     function constants() {
-        define( 'ACFS_VERSION', '1.0.0');
+        define( 'ACFS_VERSION', self::$version );
         define( 'ACFS_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }
