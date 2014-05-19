@@ -289,7 +289,7 @@ body .flexslider .slides li.slide .slide-content .slide-excerpt {
   background: rgba(0, 0, 0, 0.7);
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  -moz-background-clip: padding;
+  -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
