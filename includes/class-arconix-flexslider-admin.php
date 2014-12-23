@@ -8,36 +8,51 @@
  */
 class Arconix_FlexSlider_Admin {
 
-    public static $version = '1.0.0';
+    /**
+     * The version of this plugin.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     string      $version    The vurrent version of this plugin.
+     */
+    private $version;
 
     /**
-     * Constructor
+     * The directory path to this plugin.
      *
-     * @since 0.5
-     * @version  1.0.0
+     * @since   1.0.0
+     * @access  private
+     * @var     string      $dir    The directory path to this plugin
      */
-    function __construct() {
-        $this->constants();
+    private $dir;
+
+    /**
+     * The url path to this plugin.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     string      $url    The url path to this plugin
+     */
+    private $url;
+
+
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since   1.0.0
+     * @param   string      $version    The version of this plugin.
+     */
+    public function __construct( $version ) {
+        $this->version = $version;
+        $this->dir = trailingslashit( plugin_dir_path( __FILE__ ) );
+        $this->url = trailingslashit( plugin_dir_url( __FILE__ ) );
 
         add_action( 'wp_enqueue_scripts',   array( $this, 'scripts' ) );
-        add_action( 'widgets_init',         array( $this, 'widgets' ) );
+        add_action( 'widgets_init',         array( 'Arconix_Flexslider_Widget', 'register' ) );
         add_action( 'wp_dashboard_setup',   array( $this, 'register_dashboard_widget' ) );
 
         add_shortcode( 'ac-flexslider',     array( $this, 'flexslider_shortcode' ) );
     }
-
-    /**
-     * Define the constants
-     *
-     * @since    0.5
-     * @version  1.0.0
-     */
-    function constants() {
-        define( 'ACFS_VERSION', self::$version );
-        define( 'ACFS_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
-        define( 'ACFS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
-    }
-
 
     /**
      * Register the necessary Javascript and CSS, which can be overridden in 3 different ways.
@@ -65,10 +80,10 @@ class Arconix_FlexSlider_Admin {
      * @since   0.1
      * @version 1.0.0
      */
-    function scripts() {
+    public function scripts() {
         // Provide script registration args so they can be filtered if necessary
         $script_args = apply_filters( 'arconix_flexslider_reg', array(
-            'url' => ACFS_URL . 'js/jquery.flexslider-min.js',
+            'url' => $this->url . 'js/jquery.flexslider-min.js',
             'ver' => '2.2.2',
             'dep' => 'jquery'
         ) );
@@ -78,21 +93,21 @@ class Arconix_FlexSlider_Admin {
         // Register the javascript - Check the child theme directory first, the parent theme second, otherwise load the plugin version
         if( apply_filters( 'pre_register_arconix_flexslider_js', true ) ) {
             if( file_exists( get_stylesheet_directory() . '/arconix-flexslider.js' ) )
-                wp_register_script( 'arconix-flexslider-js', get_stylesheet_directory_uri() . '/arconix-flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
+                wp_register_script( 'arconix-flexslider-js', get_stylesheet_directory_uri() . '/arconix-flexslider.js', array( 'flexslider' ), $this->version, true );
             elseif( file_exists( get_template_directory() . '/arconix-flexslider.js' ) )
-                wp_register_script( 'arconix-flexslider-js', get_template_directory_uri() . '/arconix-flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
+                wp_register_script( 'arconix-flexslider-js', get_template_directory_uri() . '/arconix-flexslider.js', array( 'flexslider' ), $this->version, true );
             else
-                wp_register_script( 'arconix-flexslider-js', ACFS_URL . 'js/arconix-flexslider.js', array( 'flexslider' ), ACFS_VERSION, true );
+                wp_register_script( 'arconix-flexslider-js', $this->url . 'js/arconix-flexslider.js', array( 'flexslider' ), $this->version, true );
         }
 
         // Load the CSS - Check the child theme directory first, the parent theme second, otherwise load the plugin version
         if( apply_filters( 'pre_register_arconix_flexslider_css', true ) ) {
             if( file_exists( get_stylesheet_directory() . '/arconix-flexslider.css' ) )
-                wp_enqueue_style( 'arconix-flexslider', get_stylesheet_directory_uri() . '/arconix-flexslider.css', false, ACFS_VERSION );
+                wp_enqueue_style( 'arconix-flexslider', get_stylesheet_directory_uri() . '/arconix-flexslider.css', false, $this->version );
             elseif( file_exists( get_template_directory() . '/arconix-flexslider.css' ) )
-                wp_enqueue_style( 'arconix-flexslider', get_template_directory_uri() . '/arconix-flexslider.css', false, ACFS_VERSION );
+                wp_enqueue_style( 'arconix-flexslider', get_template_directory_uri() . '/arconix-flexslider.css', false, $this->version );
             else
-                wp_enqueue_style( 'arconix-flexslider', ACFS_URL . 'css/arconix-flexslider.css', false, ACFS_VERSION );
+                wp_enqueue_style( 'arconix-flexslider', $this->url . 'css/arconix-flexslider.css', false, $this->version );
         }
 
     }
@@ -109,7 +124,7 @@ class Arconix_FlexSlider_Admin {
      * @since    0.5
      * @version  1.0.0
      */
-    function flexslider_shortcode( $atts, $content = null ) {
+    public function flexslider_shortcode( $atts, $content = null ) {
         // Load the javascript if it hasn't been overridden
         if( wp_script_is( 'arconix-flexslider-js', 'registered' ) ) wp_enqueue_script( 'arconix-flexslider-js' );
 
@@ -119,20 +134,11 @@ class Arconix_FlexSlider_Admin {
     }
 
     /**
-     * Register the Slider Widget
-     *
-     * @since 0.1
-     */
-    function widgets() {
-        register_widget( 'Arconix_FlexSlider_Widget' );
-    }
-
-    /**
      * Register the dashboard widget
      *
      * @since 0.1
      */
-    function register_dashboard_widget() {
+    public function register_dashboard_widget() {
         if( apply_filters( 'pre_register_arconix_flexslider_dashboard_widget', true ) and
             apply_filters( 'arconix_flexslider_dashboard_widget_security', current_user_can( 'manage_options' ) ) )
                 wp_add_dashboard_widget( 'ac-flexslider', 'Arconix FlexSlider', array( $this, 'dashboard_widget_output' ) );
@@ -144,7 +150,7 @@ class Arconix_FlexSlider_Admin {
      * @since 0.1
      * @version 1.0.0
      */
-    function dashboard_widget_output() {
+    public function dashboard_widget_output() {
         echo '<div class="rss-widget">';
 
         wp_widget_rss_output( array(

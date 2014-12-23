@@ -4,13 +4,13 @@
  *
  * @since 0.1
  */
-class Arconix_FlexSlider_Widget extends WP_Widget {
+class Arconix_Flexslider_Widget extends WP_Widget {
 
     /**
      * Holds widget settings defaults, populated in constructor.
      *
      * @var array
-     * 
+     *
      * @since 0.1
      */
     protected $defaults = array();
@@ -47,11 +47,20 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
     }
 
     /**
+     * Registers the widget with the WordPress Widget API.
+     *
+     * @since 1.0.0
+     */
+    public static function register() {
+        register_widget( __CLASS__ );
+    }
+
+    /**
      * Widget Output
      *
      * @param type $args        Display arguments including before_title, after_title, before_widget, and after_widget.
      * @param type $instance    The settings for the particular instance of the widget
-     * 
+     *
      * @since 0.1
      * @version 1.0.0
      */
@@ -82,14 +91,14 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      *
      * @param array $new_instance   New settings for this widget as input by the user via form()
      * @param array $old_instance   Existing settings for this widget
-     * 
+     *
      * @return array    Settings to save or bool false to cancel saving
-     * 
+     *
      * @since 0.1
      * @version 1.0.0
      */
     function update( $new_instance, $old_instance ) {
-        
+
         $new_instance['title'] = strip_tags( $new_instance['title'] );
         $new_instance['posts_per_page'] = absint( $new_instance['posts_per_page'] );
         $new_instance['category_name'] = strip_tags( $new_instance['category_name'] );
@@ -102,7 +111,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      * Widget form
      *
      * @param array $instance Current settings
-     * 
+     *
      * @since 0.1
      * @version 1.0.0
      */
@@ -237,7 +246,7 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      *
      * @global array $_wp_additional_image_sizes Additionally registered image sizes
      * @return array Two-dimensional, with width, height and crop sub-keys
-     * 
+     *
      * @since 0.1
      */
     function get_image_sizes() {
@@ -272,13 +281,13 @@ class Arconix_FlexSlider_Widget extends WP_Widget {
      *
      * This function is primarily geared towards developers who do work for clients and want to restrict
      * the post types visible in the widget drop down. The default list includes the 2 WordPress post
-     * types plus the post type for the popular plugin Contact Form 7. The list can be filtered to 
+     * types plus the post type for the popular plugin Contact Form 7. The list can be filtered to
      * add any other desired post types
      *
      * @example https://gist.github.com/j-gardner/10469315
      *
      * @return array modified post_type list
-     * 
+     *
      * @since   0.1
      * @version 0.5
      */

@@ -17,4 +17,75 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-flexslider.p
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-flexslider-admin.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-flexslider-widget.php' );
 
-new Arconix_Flexslider_Admin;
+class Arconix_Flexslider_Plugin {
+
+    /**
+     * Stores the current version of the plugin.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     string      $version    Current plugin version
+     */
+    private $version;
+
+    /**
+     * The directory path to the plugin file's includes folder.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     string      $inc    The directory path to the includes folder
+     */
+    private $inc;
+
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since   1.0.0
+     */
+    public function __construct() {
+        $this->version = '1.0.0';
+        $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
+        $this->load_dependencies();
+        $this->load_admin();
+    }
+
+    /**
+     * Load the required dependencies for the plugin.
+     *
+     * - Admin loads the backend functionality
+     * - Public provides front-end functionality
+     * - Dashboard Glancer loads the helper class for the admin dashboard
+     *
+     * @since   1.0.0
+     */
+    private function load_dependencies() {
+        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-arconix-flexslider-admin.php' );
+        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-arconix-flexslider-public.php' );
+        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-arconix-flexslider-widgets.php' );
+    }
+
+    /**
+     * Load the Administration portion
+     *
+     * @since   1.0.0
+     */
+    private function load_admin() {
+        new Arconix_Flexslider_Admin( $this->get_version() );
+    }
+
+    /**
+     * Get the current version of the plugin
+     *
+     * @since   1.0.0
+     * @return  string  Plugin current version
+     */
+    public function get_version() {
+        return $this->version;
+    }
+}
+
+/** Vroom vroom */
+add_action( 'plugins_loaded', 'arconix_flexslider_plugin_run' );
+function arconix_flexslider_plugin_run() {
+    new Arconix_Flexslider_Plugin;
+}
