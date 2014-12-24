@@ -5,16 +5,15 @@ class Arconix_FlexSlider {
     /**
      * Holds loop defaults, populated in constructor.
      *
-     * @var     array   $defaults   defaults
-     *
      * @since   1.0.0
+     * @var     array   $defaults   defaults
      */
     protected $defaults;
 
     /**
      * Constructor
      *
-     * @since   0.5
+     * @since   0.5.0
      * @version 1.0.0
      */
     function __construct() {
@@ -23,7 +22,7 @@ class Arconix_FlexSlider {
             'post_type'         => 'post',
             'category_name'     => '',
             'tag'               => '',
-            'posts_per_page'    => '5',
+            'posts_per_page'    => 5,
             'orderby'           => 'date',
             'order'             => 'DESC',
             'image_size'        => 'medium',
@@ -44,106 +43,41 @@ class Arconix_FlexSlider {
     }
 
     /**
-     * Returns Flexslider query results
-     *
-     * @todo    Break up if() statements into more manageable sub functions
+     * Returns Flexslider query results in an unordered list of slides
      *
      * @since   0.1.0
-     * @param   array   $args       incoming query arguments
-     * @param   bool    $echo       echo or return results
-     * @return  string              flexslider slides
+     * @version 1.0.0
+     * @param   array   $args       Incoming query arguments
+     * @param   bool    $echo       Echo or return results
+     * @return  string  $return     Slider slides
      */
     function loop( $args, $echo = false ) {
 
-        $defaults = $this->getdefaults();
+        $args = wp_parse_args( $args, $this->getdefaults() );
 
-        $args = wp_parse_args( $args, $defaults );
-
-        // Declare each item in $args as its own variable
-        //extract( $args, EXTR_SKIP );
-
-        $query_args = array(
+        // Last chance to change any arguments before the query is run
+        $query_args = apply_filters( 'arconix_flexslider_loop_args', array(
             'post_type'         => $args['post_type'],
             'posts_per_page'    => $args['posts_per_page'],
             'category_name'     => $args['category_name'],
             'tag'               => $args['tag'],
             'orderby'           => $args['orderby'],
             'order'             => $args['order']
-        );
+        ) );
 
-        // Allow the query args to be filtered before the query is run
-        $query_args = apply_filters( 'arconix_flexslider_loop_args', $query_args );
-
-        $fquery = new WP_Query( $query_args );
+        $query = new WP_Query( $query_args );
 
         $return = '';
 
-        if ( $fquery->have_posts() ) {
+        if ( $query->have_posts() ) {
             $return .= '<div class="arconix-flexslider-' . $args['type'] . '"><div class="flexslider">
                 <ul class="slides">';
 
-            while ( $fquery->have_posts() ) : $fquery->the_post();
+            while ( $query->have_posts() ) : $query->the_post();
 
                 $return .= '<li>';
 
-                if ( 'none' != $args['show_content'] )
-                    $return .= '<div class="flex-image-wrap">';
-
-                if ( $args['image_link'] )
-                    $return .= '<a href="' . get_permalink() . '" rel="bookmark">';
-
-                if ( has_post_thumbnail )
-                    $return .= get_the_post_thumbnail( get_the_ID(), $args['image_size'] );
-
-                switch( $args['show_caption'] ) {
-                    case 'post title':
-                    case 'post-title':
-                    case 'posttitle':
-                        $return .= '<p class="flex-caption">' . get_the_title() . '</p>';
-                        break;
-
-                    case 'image title':
-                    case 'image-title':
-                    case 'imagetitle':
-                        $return .= '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $fquery->ID ) )->post_title . '</p>';
-                        break;
-
-                    case 'image caption':
-                    case 'image-caption':
-                    case 'imagecaption':
-                        $return .= '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $fquery->ID ) )->post_excerpt . '</p>';
-                        break;
-
-                    default:
-                        break;
-                }
-
-                if ( $args['image_link'] )
-                    $return .= '</a>';
-
-                //if( 'none' != $args['show_content'] )
-
-                if ( 'none' != $args['show_content'] ) {
-                    $return .= '</div>';
-                    $return .= '<div class="flex-content-wrap">';
-                    $return .= '<div class="flex-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
-                    $return .= '<div class="flex-content">';
-
-                    switch( $args['show_content'] ) {
-                        case 'content':
-                            $return .= get_the_content();
-                            break;
-
-                        case 'excerpt':
-                            $return .= get_the_excerpt();
-                            break;
-
-                        default: // just in case
-                            break;
-                    }
-
-                    $return .= '</div>';
-                }
+                $return .= $this->slide_content( get_the_ID(), $args );
 
                 $return .= '</li>';
 
@@ -160,18 +94,131 @@ class Arconix_FlexSlider {
             return $return;
     }
 
+    /**
+     * Get the slide content including image, caption, and content
+     *
+     * @since   1.0.0
+     * @param   int     $id         WP Post object ID
+     * @param   array   $args       Loop arguments. Will pull class defaults if parameter is not supplied or is not an array
+     * @param   bool    $echo       Echo or return the content
+     * @return  string  $s          Concatenated string containing the slide content
+     */
+    public function slide_content( $id, $args, $echo = false ) {
+        if ( empty( $id ) ) $id = get_the_ID();
+        if ( empty( $args ) || ! is_array( $args ) ) $args = $this->getdefaults();
+
+        $s = '';
+
+        if ( 'none' != $args['show_content'] )
+            $s .= '<div class="flex-image-wrap">';
+
+        $s .= $this->slide_image( $id, $args['image_link'], $args['image_size'], $args['show_caption'] );
+
+        if ( 'none' != $args['show_content'] ) {
+            $s .= '</div>';
+            $s .= '<div class="flex-content-wrap">';
+            $s .= '<div class="flex-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
+            $s .= '<div class="flex-content">';
+
+            switch( $args['show_content'] ) {
+                case 'content':
+                    $s .= get_the_content();
+                    break;
+
+                case 'excerpt':
+                    $s .= get_the_excerpt();
+                    break;
+
+                default: // just in case
+                    break;
+            }
+
+            $s .= '</div>';
+        }
 
 
-    public function slider_caption() {
-
+        if ( $echo === true )
+            echo $s;
+        else
+            return $s;
     }
 
-    public function slider_content() {
+    /**
+     * Get the slide image
+     *
+     * @since   1.0.0
+     * @param   int     $id             WP Post ID
+     * @param   bool    $image_link     Wrap the image in a hyperlink to the permalink
+     * @param   string  $image_size     The size of the image to display. Accepts any valid WordPress image
+     * @param   string  $show_caption   Caption to be displayed
+     * @param   bool    $echo           Echo or return the results
+     * @return  string  $s              Slide image
+     */
+    public function slide_image( $id, $image_link, $image_size, $caption, $echo = false ) {
+        if ( empty( $id ) ) $id = get_the_ID();
 
+        $s = '';
+
+        if ( $image_link )
+            $s .= '<a href="' . get_permalink() . '" rel="bookmark">';
+
+        if ( has_post_thumbnail() )
+            $s .= get_the_post_thumbnail( $id, $image_size );
+
+        $s .= $this->slide_caption( $id, $caption );
+
+        if ( $image_link )
+            $s .= '</a>';
+
+
+        if ( $echo === true )
+            echo $s;
+        else
+            return $s;
     }
 
-    public function slider_image() {
-        
+    /**
+     * Get the slide caption. Returns early if the caption will not be displayed
+     *
+     * @since   1.0.0
+     * @param   int     $id         WP Post ID
+     * @param   string  $caption    The type of image caption to display
+     * @param   bool    $echo       Echo or return the results
+     * @return  string  $s          Slide caption wrapped in a paragraph tag
+     */
+    public function slide_caption( $id, $caption, $echo = false ) {
+        if ( empty( $id ) ) $id = get_the_ID();
+
+        if ( empty( $caption ) ) return;
+
+        switch( $caption ) {
+            case 'post title':
+            case 'post-title':
+            case 'posttitle':
+                $s = '<p class="flex-caption">' . get_the_title() . '</p>';
+                break;
+
+            case 'image title':
+            case 'image-title':
+            case 'imagetitle':
+                $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_title . '</p>';
+                break;
+
+            case 'image caption':
+            case 'image-caption':
+            case 'imagecaption':
+                $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_excerpt . '</p>';
+                break;
+
+            default:
+                $s = '';
+                break;
+        }
+
+        if ( $echo === true )
+            echo $s;
+        else
+            return $s;
     }
 
 
