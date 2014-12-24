@@ -6,7 +6,7 @@
  *
  * @since  1.0.0
  */
-class Arconix_FlexSlider_Admin {
+class Arconix_Flexslider_Admin {
 
     /**
      * The version of this plugin.
