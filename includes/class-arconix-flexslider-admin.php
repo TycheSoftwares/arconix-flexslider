@@ -83,8 +83,8 @@ class Arconix_Flexslider_Admin {
     public function scripts() {
         // Provide script registration args so they can be filtered if necessary
         $script_args = apply_filters( 'arconix_flexslider_reg', array(
-            'url' => $this->url . 'js/jquery.flexslider-min.js',
-            'ver' => '2.2.2',
+            'url' => $this->url . 'js/owl.carousel.min.js',
+            'ver' => '1.3.2',
             'dep' => 'jquery'
         ) );
 
@@ -102,12 +102,13 @@ class Arconix_Flexslider_Admin {
 
         // Load the CSS - Check the child theme directory first, the parent theme second, otherwise load the plugin version
         if( apply_filters( 'pre_register_arconix_flexslider_css', true ) ) {
-            if( file_exists( get_stylesheet_directory() . '/arconix-flexslider.css' ) )
+            /*if( file_exists( get_stylesheet_directory() . '/arconix-flexslider.css' ) )
                 wp_enqueue_style( 'arconix-flexslider', get_stylesheet_directory_uri() . '/arconix-flexslider.css', false, $this->version );
             elseif( file_exists( get_template_directory() . '/arconix-flexslider.css' ) )
                 wp_enqueue_style( 'arconix-flexslider', get_template_directory_uri() . '/arconix-flexslider.css', false, $this->version );
-            else
-                wp_enqueue_style( 'arconix-flexslider', $this->url . 'css/arconix-flexslider.css', false, $this->version );
+            else*/
+                wp_enqueue_style( 'owl-carousel', $this->url . 'css/owl.carousel.css', false, $this->version );
+                wp_enqueue_style( 'owl-theme', $this->url . 'css/owl.theme.css', false, $this->version );
         }
 
     }

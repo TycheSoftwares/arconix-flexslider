@@ -70,20 +70,19 @@ class Arconix_FlexSlider {
         $return = '';
 
         if ( $query->have_posts() ) {
-            $return .= '<div class="arconix-flexslider-' . $args['type'] . '"><div class="flexslider">
-                <ul class="slides">';
+            $return .= '<div class="owl-carousel arconix-' . $args['type'] . '">';
 
             while ( $query->have_posts() ) : $query->the_post();
 
-                $return .= '<li>';
+                $return .= '<div>';
 
                 $return .= $this->slide_content( get_the_ID(), $args );
 
-                $return .= '</li>';
+                $return .= '</div>';
 
             endwhile;
 
-            $return .= '</ul></div></div>';
+            $return .= '</div>';
         }
         wp_reset_postdata();
 
