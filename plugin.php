@@ -13,10 +13,6 @@
   License URI: http://www.opensource.org/licenses/gpl-license.php
  */
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-flexslider.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-flexslider-admin.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-flexslider-widget.php' );
-
 class Arconix_Flexslider_Plugin {
 
     /**
@@ -59,9 +55,9 @@ class Arconix_Flexslider_Plugin {
      * @since   1.0.0
      */
     private function load_dependencies() {
-        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-arconix-flexslider-admin.php' );
-        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-arconix-flexslider-public.php' );
-        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-arconix-flexslider-widgets.php' );
+        require_once( $this->inc . 'class-arconix-flexslider-admin.php' );
+        require_once( $this->inc . 'class-arconix-flexslider-public.php' );
+        require_once( $this->inc . 'class-arconix-flexslider-widget.php' );
     }
 
     /**
