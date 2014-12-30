@@ -6,7 +6,8 @@ class Arconix_FlexSlider {
      * Holds loop defaults, populated in constructor.
      *
      * @since   1.0.0
-     * @var     array   $defaults   defaults
+     * @access  protected
+     * @var     array       $defaults   default args
      */
     protected $defaults;
 
@@ -26,7 +27,7 @@ class Arconix_FlexSlider {
             'orderby'           => 'date',
             'order'             => 'DESC',
             'image_size'        => 'medium',
-            'image_link'        => 1,
+            'link_image'        => 1,
             'show_caption'      => 'none',
             'show_content'      => 'none'
         ) );
@@ -43,7 +44,7 @@ class Arconix_FlexSlider {
     }
 
     /**
-     * Returns Flexslider query results in an unordered list of slides
+     * Returns Slider query results list of slides
      *
      * @since   0.1.0
      * @version 1.0.0
@@ -51,7 +52,7 @@ class Arconix_FlexSlider {
      * @param   bool    $echo       Echo or return results
      * @return  string  $return     Slider slides
      */
-    function loop( $args, $echo = false ) {
+    public function loop( $args, $echo = false ) {
 
         $args = wp_parse_args( $args, $this->getdefaults() );
 
@@ -76,7 +77,7 @@ class Arconix_FlexSlider {
 
                 $return .= '<div>';
 
-                $return .= $this->slide_content( get_the_ID(), $args );
+                $return .= $this->slide_content( $args );
 
                 $return .= '</div>';
 
@@ -97,27 +98,25 @@ class Arconix_FlexSlider {
      * Get the slide content including image, caption, and content
      *
      * @since   1.0.0
-     * @param   int     $id         WP Post object ID
      * @param   array   $args       Loop arguments. Will pull class defaults if parameter is not supplied or is not an array
      * @param   bool    $echo       Echo or return the content
      * @return  string  $s          Concatenated string containing the slide content
      */
-    public function slide_content( $id, $args, $echo = false ) {
-        if ( empty( $id ) ) $id = get_the_ID();
+    public function slide_content( $args, $echo = false ) {
         if ( empty( $args ) || ! is_array( $args ) ) $args = $this->getdefaults();
 
         $s = '';
 
         if ( 'none' != $args['show_content'] )
-            $s .= '<div class="flex-image-wrap">';
+            $s .= '<div class="arconix-image-wrap">';
 
-        $s .= $this->slide_image( $id, $args['image_link'], $args['image_size'], $args['show_caption'] );
+        $s .= $this->slide_image( $args['link_image'], $args['image_size'], $args['show_caption'] );
 
         if ( 'none' != $args['show_content'] ) {
             $s .= '</div>';
-            $s .= '<div class="flex-content-wrap">';
-            $s .= '<div class="flex-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
-            $s .= '<div class="flex-content">';
+            $s .= '<div class="arconix-content-wrap">';
+            $s .= '<div class="arconix-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
+            $s .= '<div class="arconix-content">';
 
             switch( $args['show_content'] ) {
                 case 'content':
@@ -135,7 +134,6 @@ class Arconix_FlexSlider {
             $s .= '</div>';
         }
 
-
         if ( $echo === true )
             echo $s;
         else
@@ -146,19 +144,18 @@ class Arconix_FlexSlider {
      * Get the slide image
      *
      * @since   1.0.0
-     * @param   int     $id             WP Post ID
-     * @param   bool    $image_link     Wrap the image in a hyperlink to the permalink
-     * @param   string  $image_size     The size of the image to display. Accepts any valid WordPress image
-     * @param   string  $show_caption   Caption to be displayed
+     * @param   bool    $link_image     Wrap the image in a hyperlink to the permalink (false for basic image slider)
+     * @param   string  $image_size     The size of the image to display. Accepts any valid built-in or added WordPress image size
+     * @param   string  $caption        Caption to be displayed
      * @param   bool    $echo           Echo or return the results
      * @return  string  $s              Slide image
      */
-    public function slide_image( $id, $image_link, $image_size, $caption, $echo = false ) {
-        if ( empty( $id ) ) $id = get_the_ID();
+    public function slide_image( $link_image, $image_size, $caption, $echo = false ) {
+        $id = get_the_ID();
 
         $s = '';
 
-        if ( $image_link )
+        if ( $link_image )
             $s .= '<a href="' . get_permalink() . '" rel="bookmark">';
 
         if ( has_post_thumbnail() )
@@ -166,9 +163,8 @@ class Arconix_FlexSlider {
 
         $s .= $this->slide_caption( $id, $caption );
 
-        if ( $image_link )
+        if ( $link_image )
             $s .= '</a>';
-
 
         if ( $echo === true )
             echo $s;
@@ -180,13 +176,12 @@ class Arconix_FlexSlider {
      * Get the slide caption. Returns early if the caption will not be displayed
      *
      * @since   1.0.0
-     * @param   int     $id         WP Post ID
      * @param   string  $caption    The type of image caption to display
      * @param   bool    $echo       Echo or return the results
      * @return  string  $s          Slide caption wrapped in a paragraph tag
      */
-    public function slide_caption( $id, $caption, $echo = false ) {
-        if ( empty( $id ) ) $id = get_the_ID();
+    public function slide_caption( $caption, $echo = false ) {
+        $id = get_the_ID();
 
         if ( empty( $caption ) ) return;
 
