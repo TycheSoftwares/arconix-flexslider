@@ -9,9 +9,10 @@ class Arconix_Flexslider_Widget extends WP_Widget {
     /**
      * Holds widget settings defaults, populated in constructor.
      *
-     * @var array
-     *
-     * @since 0.1
+     * @since   0.1
+     * 
+     * @access  protected
+     * @var     array   $defaults
      */
     protected $defaults = array();
 
@@ -21,7 +22,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
      * @since   0.1
      * @version 1.0.0
      */
-    function __construct() {
+    public function __construct() {
 
         $this->defaults = array(
             'title'             => '',
@@ -33,7 +34,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
             'orderby'           => 'date',
             'order'             => 'DESC',
             'image_size'        => 'medium',
-            'image_link'        => 0,
+            'link_image'        => 0,
             'show_caption'      => 'none',
             'show_content'      => 'none'
         );
@@ -58,11 +59,11 @@ class Arconix_Flexslider_Widget extends WP_Widget {
     /**
      * Widget Output
      *
-     * @param type $args        Display arguments including before_title, after_title, before_widget, and after_widget.
-     * @param type $instance    The settings for the particular instance of the widget
-     *
-     * @since 0.1
+     * @since   0.1
      * @version 1.0.0
+     *
+     * @param   array     $args        Display arguments including before_title, after_title, before_widget, and after_widget.
+     * @param   array     $instance    The settings for the particular instance of the widget
      */
     function widget( $args, $instance ) {
 
@@ -89,13 +90,13 @@ class Arconix_Flexslider_Widget extends WP_Widget {
     /**
      * Update a particular instance.
      *
-     * @param array $new_instance   New settings for this widget as input by the user via form()
-     * @param array $old_instance   Existing settings for this widget
-     *
-     * @return array    Settings to save or bool false to cancel saving
-     *
-     * @since 0.1
+     * @since   0.1
      * @version 1.0.0
+     *
+     * @param   array $new_instance     New settings for this widget as input by the user via form()
+     * @param   array $old_instance     Existing settings for this widget
+     *
+     * @return  array $new_instance     Settings to save or bool false to cancel saving
      */
     function update( $new_instance, $old_instance ) {
 
@@ -110,10 +111,9 @@ class Arconix_Flexslider_Widget extends WP_Widget {
     /**
      * Widget form
      *
-     * @param array $instance Current settings
-     *
-     * @since 0.1
+     * @since   0.1
      * @version 1.0.0
+     * @param   array   $instance   Current settings
      */
     function form( $instance ) {
 
@@ -207,8 +207,8 @@ class Arconix_Flexslider_Widget extends WP_Widget {
 
         <!-- Image Link: Checkbox -->
         <p>
-            <input id="<?php echo $this->get_field_id( 'image_link' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'image_link' ); ?>" value="1"<?php checked( $instance['image_link'] ); ?> />
-            <label for="<?php echo $this->get_field_id( 'image_link' ); ?>"><?php _e( 'Hyperlink image to the permalink', 'acfs' ); ?></label>
+            <input id="<?php echo $this->get_field_id( 'link_image' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'link_image' ); ?>" value="1"<?php checked( $instance['link_image'] ); ?> />
+            <label for="<?php echo $this->get_field_id( 'link_image' ); ?>"><?php _e( 'Hyperlink image to the permalink', 'acfs' ); ?></label>
         </p>
 
         <!-- Show Caption: Select Box -->
@@ -237,17 +237,15 @@ class Arconix_Flexslider_Widget extends WP_Widget {
         <?php
     }
 
-
     /**
      * Returns registered image sizes.
      *
      * Gets the image sizes that have been added via `add_image_size()` and merges
      * them with the WordPress builtin image sizes.
      *
-     * @global array $_wp_additional_image_sizes Additionally registered image sizes
-     * @return array Two-dimensional, with width, height and crop sub-keys
-     *
-     * @since 0.1
+     * @since   0.1
+     * @global  array   $_wp_additional_image_sizes     Additionally registered image sizes
+     * @return  array                                   Two-dimensional, with width, height and crop sub-keys
      */
     function get_image_sizes() {
 
@@ -286,10 +284,10 @@ class Arconix_Flexslider_Widget extends WP_Widget {
      *
      * @example https://gist.github.com/j-gardner/10469315
      *
-     * @return array modified post_type list
-     *
      * @since   0.1
      * @version 0.5
+     *
+     * @return  array   $post_types     Modified post_type list
      */
     function get_modified_post_type_list() {
         $post_types = get_post_types( '', 'names' );
