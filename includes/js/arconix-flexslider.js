@@ -8,25 +8,18 @@ of the plugin's version and will maintain your changes on upgrade
 */
 jQuery(document).ready(function() {
     // Slider
-    jQuery('.arconix-flexslider-slider .flexslider').flexslider( {
-        animation:      'slide',
-        pauseOnHover:   true,
-    } );
+    jQuery('.owl-carousel.arconix-slider').owlCarousel({
+        slidespeed:         400,
+        autoHeight:         true,
+        transitionStyle:    "fade",
+        navigation:         true,
+        singleItem:         true
+    });
 
-    // Carousel
-    jQuery('.arconix-flexslider-carousel .flexslider').flexslider( {
-        animation:      'slide',
-        animationLoop:  false,
-        itemWidth:      210,
-        itemMargin:     5,
-        minItems:       2,
-        maxItems:       4,
-        slideshow:      false
-    } );
-    
-    jQuery('.owl-carousel').owlCarousel({
+    jQuery('.owl-carousel.arconix-carousel').owlCarousel({
+        slidespeed:     400,
         navigation:     true,
-        singleItem:     true
-    })
-    
+        items:          4,
+    });
+
 } );
