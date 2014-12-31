@@ -150,8 +150,6 @@ class Arconix_FlexSlider {
     public function slide_caption( $caption, $echo = false ) {
         if ( empty( $caption ) ) return;
 
-        $id = get_the_ID();
-
         switch( strtolower( $caption ) ) {
             case 'post title':
             case 'post-title':
@@ -174,12 +172,14 @@ class Arconix_FlexSlider {
             case 'image title':
             case 'image-title':
             case 'imagetitle':
+                $id = get_the_ID();
                 $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_title . '</p>';
                 break;
 
             case 'image caption':
             case 'image-caption':
             case 'imagecaption':
+                $id = get_the_ID();
                 $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_excerpt . '</p>';
                 break;
 
@@ -207,10 +207,7 @@ class Arconix_FlexSlider {
     public function slide_content( $display, $echo = false ) {
         if ( ! $display || $display == 'none' ) return;
 
-        //$s = '<div class="arconix-slide-content-wrap">';
-        $s = '';
-
-        $s .= '<div class="arconix-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
+        $s = '<h2 class="arconix-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></h2>';
         $s .= '<div class="arconix-content">';
 
             switch( $display ) {
