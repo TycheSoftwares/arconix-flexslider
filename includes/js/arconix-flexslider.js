@@ -9,17 +9,20 @@ of the plugin's version and will maintain your changes on upgrade
 jQuery(document).ready(function() {
     // Slider
     jQuery('.owl-carousel.arconix-slider').owlCarousel({
-        slidespeed:         400,
+        singleItem:         true,
+        slideSpeed:         500,
         autoHeight:         true,
-        transitionStyle:    "fade",
         navigation:         true,
-        singleItem:         true
+        navigationText:     false,
+        pagination:         false,
+
     });
 
     jQuery('.owl-carousel.arconix-carousel').owlCarousel({
-        slidespeed:     400,
-        navigation:     true,
-        items:          4,
+        navigationText:     false,
+        slidespeed:         400,
+        navigation:         true,
+        items:              4,
     });
 
 } );
