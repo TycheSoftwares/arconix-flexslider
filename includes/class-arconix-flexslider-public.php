@@ -185,7 +185,7 @@ class Arconix_FlexSlider {
 
         if ( empty( $caption ) ) return;
 
-        switch( $caption ) {
+        switch( strtolower( $caption ) ) {
             case 'post title':
             case 'post-title':
             case 'posttitle':
