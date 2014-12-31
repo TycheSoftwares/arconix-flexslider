@@ -43,6 +43,14 @@ loaded in place of the plugin's version and will maintain your changes on upgrad
 .owl-carousel .owl-item {
   float: left;
 }
+.owl-carousel .owl-item.loading {
+  /* lazy-loading images */
+  min-height: 150px;
+  background: url(images/AjaxLoader.gif) no-repeat center center;
+}
+.owl-carousel .owl-item p.flex-caption {
+  box-sizing: border-box;
+}
 .owl-controls {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -72,29 +80,30 @@ loaded in place of the plugin's version and will maintain your changes on upgrad
 .owl-theme .owl-controls {
   margin-top: 10px;
   text-align: center;
-  /* If PaginationNumbers is true */
+  overflow: auto;
+}
+.owl-theme .owl-controls .owl-buttons {
+  float: right;
 }
 .owl-theme .owl-controls .owl-buttons div {
-  /* Styling Next and Prev buttons */
-  background: url(images/arrows.png) no-repeat;
-  display: block;
-  height: 80%;
-  margin-left: 5px;
+  font-family: "Verdana", "Helvetica", sans-serif;
+  font-size: 25px;
+  line-height: 1;
+  display: inline-block;
+  margin-right: 5px;
   opacity: 0.5;
-  position: absolute;
-  text-indent: -9999px;
-  top: 1%;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
-  width: 35px;
+  width: 28px;
   zoom: 1;
 }
-.owl-theme .owl-controls .owl-buttons div.owl-next {
-  background-position: -50px 0;
-  margin-left: 0;
-  right: 5px;
+.owl-theme .owl-controls .owl-buttons div.owl-prev:before {
+  content: '<';
+}
+.owl-theme .owl-controls .owl-buttons div.owl-next:before {
+  content: '>';
 }
 .owl-theme .owl-controls.clickable .owl-buttons div:hover {
   /* Clickable class fix problem with hover on touch devices */
@@ -105,6 +114,9 @@ loaded in place of the plugin's version and will maintain your changes on upgrad
   -moz-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
+}
+.owl-theme .owl-controls .owl-pagination {
+  float: left;
 }
 .owl-theme .owl-controls .owl-page {
   display: inline-block;
@@ -136,13 +148,26 @@ loaded in place of the plugin's version and will maintain your changes on upgrad
 }
 .owl-theme .owl-controls.clickable .owl-page:hover span,
 .owl-theme .owl-controls .owl-page.active span {
+  /* If PaginationNumbers is true */
   opacity: 1;
 }
-/* preloading images */
-.owl-item.loading {
-  min-height: 150px;
-  background: url(images/AjaxLoader.gif) no-repeat center center;
+.owl-theme .owl-item > div {
+  /* For positioning the caption box */
+  position: relative;
+}
+.owl-theme p.flex-caption {
+  background-color: #333333;
+  color: #ffffff;
+  bottom: 0;
+  margin-bottom: 7px;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  padding: 10px;
+  position: absolute;
+  text-decoration: none;
+  width: 100%;
 }
 .arconix-carousel .owl-item {
   margin-right: 3px;
 }
+/*# sourceMappingURL=arconix-flexslider.css.map */
