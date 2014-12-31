@@ -77,7 +77,9 @@ class Arconix_FlexSlider {
 
                 $return .= '<div>';
 
-                $return .= $this->slide_content( $args );
+                $return .= $this->slide_image( $args['link_image'], $args['image_size'], $args['show_caption'] );
+
+                $return .= $this->slide_content( $args['show_content'] );
 
                 $return .= '</div>';
 
@@ -87,57 +89,13 @@ class Arconix_FlexSlider {
         }
         wp_reset_postdata();
 
+        $return = apply_filters( 'arconix_flexslider_loop_return', $return );
+
         // Either echo or return the results
         if( $echo === true )
             echo $return;
         else
             return $return;
-    }
-
-    /**
-     * Get the slide content including image, caption, and content
-     *
-     * @since   1.0.0
-     * @param   array   $args       Loop arguments. Will pull class defaults if parameter is not supplied or is not an array
-     * @param   bool    $echo       Echo or return the content
-     * @return  string  $s          Concatenated string containing the slide content
-     */
-    public function slide_content( $args, $echo = false ) {
-        if ( empty( $args ) || ! is_array( $args ) ) $args = $this->getdefaults();
-
-        $s = '';
-
-        if ( 'none' != $args['show_content'] )
-            $s .= '<div class="arconix-image-wrap">';
-
-        $s .= $this->slide_image( $args['link_image'], $args['image_size'], $args['show_caption'] );
-
-        if ( 'none' != $args['show_content'] ) {
-            $s .= '</div>';
-            $s .= '<div class="arconix-content-wrap">';
-            $s .= '<div class="arconix-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
-            $s .= '<div class="arconix-content">';
-
-            switch( $args['show_content'] ) {
-                case 'content':
-                    $s .= get_the_content();
-                    break;
-
-                case 'excerpt':
-                    $s .= get_the_excerpt();
-                    break;
-
-                default: // just in case
-                    break;
-            }
-
-            $s .= '</div>';
-        }
-
-        if ( $echo === true )
-            echo $s;
-        else
-            return $s;
     }
 
     /**
@@ -151,20 +109,25 @@ class Arconix_FlexSlider {
      * @return  string  $s              Slide image
      */
     public function slide_image( $link_image, $image_size, $caption, $echo = false ) {
+        if ( ! has_post_thumbnail() ) return;
+
         $id = get_the_ID();
 
-        $s = '';
+        $s = '<div class="arconix-slide-image-wrap">';
 
         if ( $link_image )
             $s .= '<a href="' . get_permalink() . '" rel="bookmark">';
 
-        if ( has_post_thumbnail() )
-            $s .= get_the_post_thumbnail( $id, $image_size );
+        $s .= get_the_post_thumbnail( $id, $image_size );
 
-        $s .= $this->slide_caption( $id, $caption );
+        $s .= $this->slide_caption( $caption );
 
         if ( $link_image )
             $s .= '</a>';
+
+        $s .= '</div>';
+
+        $s = apply_filters( 'arconix_flexslider_slide_image_return', $s );
 
         if ( $echo === true )
             echo $s;
@@ -173,7 +136,11 @@ class Arconix_FlexSlider {
     }
 
     /**
-     * Get the slide caption. Returns early if the caption will not be displayed
+     * Get the slide caption. Returns early if the caption will not be displayed.
+     *
+     * - Post Title, Content and Excerpt do what you'd likely expect -- return the Title, Content or Excerpt for their
+     *   respective item
+     * - Image title and Image caption return the title and caption fields assigned to the image via the media editor
      *
      * @since   1.0.0
      * @param   string  $caption    The type of image caption to display
@@ -181,15 +148,27 @@ class Arconix_FlexSlider {
      * @return  string  $s          Slide caption wrapped in a paragraph tag
      */
     public function slide_caption( $caption, $echo = false ) {
-        $id = get_the_ID();
-
         if ( empty( $caption ) ) return;
+
+        $id = get_the_ID();
 
         switch( strtolower( $caption ) ) {
             case 'post title':
             case 'post-title':
             case 'posttitle':
                 $s = '<p class="flex-caption">' . get_the_title() . '</p>';
+                break;
+
+            case 'post content':
+            case 'post-content':
+            case 'postcontent':
+                $s = '<p class="flex-caption">' . get_the_content() . '</p>';
+                break;
+
+            case 'post excerpt':
+            case 'post-excerpt':
+            case 'postexcerpt':
+                $s = '<p class="flex-caption">' . get_the_excerpt() . '</p>';
                 break;
 
             case 'image title':
@@ -209,12 +188,52 @@ class Arconix_FlexSlider {
                 break;
         }
 
+        $s = apply_filters( 'arconix_flexslider_slide_caption_return', $s );
+
         if ( $echo === true )
             echo $s;
         else
             return $s;
     }
 
+    /**
+     * Get the slide content
+     *
+     * @since   1.0.0
+     * @param   string  $display    Content to display. Available options are 'none', 'content' and 'excerpt'. Return early if no value or 'none'
+     * @param   bool    $echo       Echo or return the content
+     * @return  string  $s          Concatenated string containing the slide content
+     */
+    public function slide_content( $display, $echo = false ) {
+        if ( ! $display || $display == 'none' ) return;
 
+        //$s = '<div class="arconix-slide-content-wrap">';
+        $s = '';
+
+        $s .= '<div class="arconix-title"><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></div>';
+        $s .= '<div class="arconix-content">';
+
+            switch( $display ) {
+                case 'content':
+                    $s .= apply_filters( 'the_content', get_the_content() );
+                    break;
+
+                case 'excerpt':
+                    $s .= apply_filters( 'the_excerpt', get_the_excerpt() );
+                    break;
+
+                default: // just in case
+                    break;
+            }
+
+        $s .= '</div>';
+
+        $s = apply_filters( 'arconix_flexslider_slide_content_return', $s );
+
+        if ( $echo === true )
+            echo $s;
+        else
+            return $s;
+    }
 
 }

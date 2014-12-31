@@ -10,7 +10,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
      * Holds widget settings defaults, populated in constructor.
      *
      * @since   0.1
-     * 
+     *
      * @access  protected
      * @var     array   $defaults
      */
@@ -216,7 +216,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'show_caption' ); ?>"><?php _e( 'Show caption', 'acfs' ); ?></label>
             <select id="<?php echo $this->get_field_id( 'show_caption' ); ?>" name="<?php echo $this->get_field_name( 'show_caption' ); ?>">
             <?php
-            $captions = array( 'none', 'post title', 'image title', 'image caption' );
+            $captions = array( 'none', 'post title', 'post content', 'post excerpt', 'image title', 'image caption' );
             foreach( $captions as $caption )
                 echo '<option value="' . $caption . '" ' . selected( $caption, $instance['show_caption'], FALSE ) . '>' . $caption . '</option>';
             ?>
