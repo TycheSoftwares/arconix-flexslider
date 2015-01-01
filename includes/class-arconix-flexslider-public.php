@@ -89,7 +89,7 @@ class Arconix_FlexSlider {
         }
         wp_reset_postdata();
 
-        $return = apply_filters( 'arconix_flexslider_loop_return', $return );
+        $return = apply_filters( 'arconix_flexslider_loop_return', $return, $args );
 
         // Either echo or return the results
         if( $echo === true )
@@ -127,7 +127,7 @@ class Arconix_FlexSlider {
 
         $s .= '</div>';
 
-        $s = apply_filters( 'arconix_flexslider_slide_image_return', $s );
+        $s = apply_filters( 'arconix_flexslider_slide_image_return', $s, $link_image, $image_size, $caption );
 
         if ( $echo === true )
             echo $s;
@@ -188,7 +188,7 @@ class Arconix_FlexSlider {
                 break;
         }
 
-        $s = apply_filters( 'arconix_flexslider_slide_caption_return', $s );
+        $s = apply_filters( 'arconix_flexslider_slide_caption_return', $s, $caption );
 
         if ( $echo === true )
             echo $s;
@@ -225,7 +225,7 @@ class Arconix_FlexSlider {
 
         $s .= '</div>';
 
-        $s = apply_filters( 'arconix_flexslider_slide_content_return', $s );
+        $s = apply_filters( 'arconix_flexslider_slide_content_return', $s, $display );
 
         if ( $echo === true )
             echo $s;
