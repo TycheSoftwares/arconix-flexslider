@@ -2,14 +2,14 @@
 /*
   Plugin Name: Arconix FlexSlider
   Plugin URI: http://www.arconixpc.com/plugins/arconix-flexslider
-  Description: A featured slider using WooThemes FlexSlider script.
+  Description: A multi-purpose responsive jQuery slider that supports custom post types and responsive themes.
 
   Author: John Gardner
   Author URI: http://www.arconixpc.com
 
   Version: 1.0.0
 
-  License: GNU General Public License v2.0
+  License: GPLv2 or later
   License URI: http://www.opensource.org/licenses/gpl-license.php
  */
 
