@@ -14,8 +14,6 @@ jQuery(document).ready(function() {
         autoHeight:         true,
         navigation:         true,
         navigationText:     false,
-        pagination:         false,
-
     });
 
     jQuery('.owl-carousel.arconix-carousel').owlCarousel({
