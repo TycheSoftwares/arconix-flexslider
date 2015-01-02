@@ -81,7 +81,8 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 1. Widget Options overview
 2. Standard and user-created post-type selection box
 3. Builtin and user-added image sizes
-
+4. Slider and carousel setup
+5. Text-focused (testimonials) slider display
 == Changelog ==
 
 = 1.0.0 =
