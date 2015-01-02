@@ -11,7 +11,7 @@ A multi-purpose responsive slider that supports custom post types and responsive
 
 == Description ==
 
-Showcase your existing content in a rotating slider or multi-image carousel that fits the users's display. Easily customizable, supporting default and custom post types with or without images. Use a shortcode or widget to display your content.
+Showcase your existing content in a rotating slider or multi-image carousel that fits the user's display. Easily customizable, supporting default and custom post types with or without images. Use a shortcode or widget to display your content.
 
 = Features =
 * Resizes based on the user's device, supporting touch navigation for phones and tablets
@@ -22,7 +22,7 @@ Showcase your existing content in a rotating slider or multi-image carousel that
 = Great for =
 * Creating a "Recent Work" image carousel for your Portfolio
 * Adding a Testimonial rotator to your sidebar or footer
-* and more...
+* and many more...
 
 = Documentation =
 Documentation can be found [here](http://arcnx.co/afswiki)
@@ -85,7 +85,9 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 == Changelog ==
 
 = 1.0.0 =
-* Switched from Flexslider script to Owl Carousel for easier styling and smaller footprint
+**This version represents a significant rewrite of the plugin including a completely different slider script. Best efforts were made to maintain as much backwards compatibility as possible, however some filter names and functions have changed, therefore it is highly recommended that existing users who've made modifications test this update on a local host or staging environment before deploying to a live environment.**
+
+* Switched from Flexslider script to Owl Carousel
 * Added an image carousel option
 * Now supports content-focused post types (e.g. testimonials, etc...)
 * Improved inline documentation
