@@ -200,8 +200,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
                 $sizes = $this->get_image_sizes();
                 foreach( $sizes as $name => $size )
                     echo '<option value="' . $name . '" ' . selected( $name, $instance['image_size'], FALSE ) . '>' . esc_html( $name ) . ' ( ' . $size['width'] . 'x' . $size['height'] . ' )</option>';
-                ?>
-                <option value="full" <?php echo selected( "full", $instance['image_size'], FALSE ); ?> '>' . <?php __( 'Full Size', 'acfs' ); ?></option>
+                    echo '<option value="full" ' . selected( "full", $instance['image_size'], FALSE ) . '>' . esc_html( 'full size', 'acfs' ) . '</option>'; ?>
             </select>
         </p>
 
