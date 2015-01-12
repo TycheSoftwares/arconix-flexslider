@@ -105,7 +105,6 @@ class Arconix_FlexSlider {
      * @param   bool    $link_image     Wrap the image in a hyperlink to the permalink (false for basic image slider)
      * @param   string  $image_size     The size of the image to display. Accepts any valid built-in or added WordPress image size
      * @param   string  $caption        Caption to be displayed
-     * @param   bool    $echo           Echo or return the results
      * @return  string  $s              Slide image
      */
     public function slide_image( $link_image, $image_size, $caption ) {
@@ -141,7 +140,6 @@ class Arconix_FlexSlider {
      *
      * @since   1.0.0
      * @param   string  $caption    The type of image caption to display
-     * @param   bool    $echo       Echo or return the results
      * @return  string  $s          Slide caption wrapped in a paragraph tag
      */
     public function slide_caption( $caption ) {
@@ -195,7 +193,6 @@ class Arconix_FlexSlider {
      *
      * @since   1.0.0
      * @param   string  $display    Content to display. Available options are 'none', 'content' and 'excerpt'. Return early if no value or 'none'
-     * @param   bool    $echo       Echo or return the content
      * @return  string  $s          Concatenated string containing the slide content
      */
     public function slide_content( $display ) {
