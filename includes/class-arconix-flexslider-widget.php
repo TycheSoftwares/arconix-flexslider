@@ -60,7 +60,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
      * Widget Output
      *
      * @since   0.1
-     * @version 1.0.0
+     * @version 1.0.1
      *
      * @param   array     $args        Display arguments including before_title, after_title, before_widget, and after_widget.
      * @param   array     $instance    The settings for the particular instance of the widget

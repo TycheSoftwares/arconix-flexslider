@@ -5,7 +5,7 @@ class Arconix_FlexSlider {
     /**
      * Holds loop defaults, populated in constructor.
      *
-     * @since   1.0.0
+     * @since   1.0.1
      * @access  protected
      * @var     array       $defaults   default args
      */
