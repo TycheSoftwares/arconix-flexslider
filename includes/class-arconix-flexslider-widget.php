@@ -66,6 +66,8 @@ class Arconix_Flexslider_Widget extends WP_Widget {
      * @param   array     $instance    The settings for the particular instance of the widget
      */
     function widget( $args, $instance ) {
+        // Load the javascript if it hasn't been overridden
+        if( wp_script_is( 'arconix-flexslider-js', 'registered' ) ) wp_enqueue_script( 'arconix-flexslider-js' );
 
         extract( $args, EXTR_SKIP );
 
