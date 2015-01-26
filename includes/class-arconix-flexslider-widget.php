@@ -27,6 +27,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
         $this->defaults = array(
             'title'             => '',
             'type'              => 'slider',
+            'is_slideshow'      => 0,
             'post_type'         => 'post',
             'category_name'     => '',
             'tag'               => '',
@@ -138,6 +139,12 @@ class Arconix_Flexslider_Widget extends WP_Widget {
                     echo '<option value="' . $config . '" ' . selected( $config, $instance['type'], FALSE ) . '>' . $config . '</option>';
                 ?>
             </select>
+        </p>
+
+        <!-- Slideshow: Checkbox -->
+        <p>
+            <input id="<?php echo $this->get_field_id( 'is_slideshow' ); ?>" type="checkbox" name="<?php echo $this->get_field_name( 'is_slideshow' ); ?>" value="1"<?php checked( $instance['is_slideshow'] ); ?> />
+            <label for="<?php echo $this->get_field_id( 'is_slideshow' ); ?>"><?php _e( 'Enable slideshow (slides auto-advance every 5 seconds)', 'acfs' ); ?></label>
         </p>
 
         <!-- Post Type: Select Box -->

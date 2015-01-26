@@ -20,6 +20,7 @@ class Arconix_FlexSlider {
     function __construct() {
         $this->defaults = array(
             'type'              => 'slider',
+            'is_slideshow'      => 'false',
             'post_type'         => 'post',
             'category_name'     => '',
             'tag'               => '',
@@ -66,12 +67,18 @@ class Arconix_FlexSlider {
             'order'             => $args['order']
         ) );
 
+        // First check is if the slideshow was called via shortcode, second if called via widget
+        if ( $args['is_slideshow'] == 'false' || $args['is_slideshow'] === 0 )
+            $slideshow = '';
+        else
+            $slideshow = ' arconix-slideshow';
+
         $query = new WP_Query( $query_args );
 
         $return = '';
 
         if ( $query->have_posts() ) {
-            $return .= '<div class="owl-carousel arconix-' . $args['type'] . '">';
+            $return .= '<div class="owl-carousel arconix-' . $args['type'] . $slideshow . '">';
 
             while ( $query->have_posts() ) : $query->the_post();
 
