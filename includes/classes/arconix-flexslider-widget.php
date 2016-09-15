@@ -42,10 +42,10 @@ class Arconix_Flexslider_Widget extends WP_Widget {
 
         $widget_ops = array(
             'classname'         => 'flexslider_widget',
-            'description'       => __( 'Responsive slider able to showcase any post type', 'acfs' )
+            'description'       => __( 'Responsive slider able to showcase any post type', 'arconix-flexslider' )
         );
 
-        parent::__construct( 'arconix-flexslider', __( 'Arconix Flexslider', 'acfs' ), $widget_ops );
+        parent::__construct( 'arconix-flexslider', __( 'Arconix Flexslider', 'arconix-flexslider' ), $widget_ops );
     }
 
     /**
@@ -68,7 +68,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
      */
     function widget( $args, $instance ) {
         // Load the javascript if it hasn't been overridden
-        if( wp_script_is( 'arconix-flexslider-js', 'registered' ) ) wp_enqueue_script( 'arconix-flexslider-js' );
+        if ( wp_script_is( 'arconix-flexslider-js', 'registered' ) ) wp_enqueue_script( 'arconix-flexslider-js' );
 
         extract( $args, EXTR_SKIP );
 
