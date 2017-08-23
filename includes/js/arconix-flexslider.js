@@ -23,4 +23,14 @@ jQuery(document).ready(function() {
         items:              4,
     });
 
+    jQuery('.owl-carousel.arconix-slide-show').owlCarousel({
+        singleItem:         true,
+        slideSpeed:         500,
+        autoHeight:         true,
+        navigation:         true,
+        navigationText:     false,
+        autoPlay:           true,
+    });
+    
+
 } );
