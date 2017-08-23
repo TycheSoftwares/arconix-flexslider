@@ -159,13 +159,13 @@ class Arconix_Flexslider_Widget extends WP_Widget {
         </p>
 
         <!-- Category: Input Box -->
-        <p class="category" style='display: none;'>
+        <p class="category" <?php if($instance['post_type'] != 'post'){ echo "style='display: none;'";}?>>
             <label for="<?php echo $this->get_field_id( 'category_name' ); ?>"><?php _e( 'Show posts only from a specific category or comma separated categories (use the slug form)', 'acfs' ); ?>:</label>
             <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'category_name' ); ?>" name="<?php echo $this->get_field_name( 'category_name' ); ?>" value="<?php echo $instance['category_name']; ?>" />
         </p>
 
         <!-- Tag: Input Box -->
-        <p class="tag" style='display: none;'>
+        <p class="tag" <?php  if($instance['post_type'] != 'post'){ echo "style='display: none;'"; } ?>>
             <label for="<?php echo $this->get_field_id( 'tag' ); ?>"><?php _e( 'Show posts only from a specific tag or comma separated tags (use the slug form)', 'acfs' ); ?>:</label>
             <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'tag' ); ?>" name="<?php echo $this->get_field_name( 'tag' ); ?>" value="<?php echo $instance['tag']; ?>" />
         </p>
