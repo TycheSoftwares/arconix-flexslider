@@ -143,7 +143,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
         <!-- Post Type: Select Box -->
         <p>
             <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type', 'acfs' ); ?>:</label>
-            <select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
+            <select id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>" class='widget_post_type'>
                 <?php
                 $types = $this->get_modified_post_type_list();
                 foreach( $types as $type )
@@ -159,13 +159,13 @@ class Arconix_Flexslider_Widget extends WP_Widget {
         </p>
 
         <!-- Category: Input Box -->
-        <p>
+        <p class="category" <?php if($instance['post_type'] != 'post'){ echo "style='display: none;'";}?>>
             <label for="<?php echo $this->get_field_id( 'category_name' ); ?>"><?php _e( 'Show posts only from a specific category or comma separated categories (use the slug form)', 'acfs' ); ?>:</label>
             <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'category_name' ); ?>" name="<?php echo $this->get_field_name( 'category_name' ); ?>" value="<?php echo $instance['category_name']; ?>" />
         </p>
 
         <!-- Tag: Input Box -->
-        <p>
+        <p class="tag" <?php  if($instance['post_type'] != 'post'){ echo "style='display: none;'"; } ?>>
             <label for="<?php echo $this->get_field_id( 'tag' ); ?>"><?php _e( 'Show posts only from a specific tag or comma separated tags (use the slug form)', 'acfs' ); ?>:</label>
             <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'tag' ); ?>" name="<?php echo $this->get_field_name( 'tag' ); ?>" value="<?php echo $instance['tag']; ?>" />
         </p>

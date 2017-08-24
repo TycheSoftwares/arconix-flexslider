@@ -113,6 +113,8 @@ class Arconix_Flexslider_Admin {
     public function admin_scripts() {
         if( apply_filters( 'pre_register_arconix_flexslider_admin_css', true ) )
             wp_enqueue_style( 'arconix-flexslider-admin', $this->url . 'css/admin.css', false, $this->version );
+
+        wp_enqueue_script( 'arconix-flexslider-adminjs', $this->url . 'js/arconix-flexslider-widget.js', false, $this->version);
     }
 
     /**
