@@ -133,7 +133,7 @@ class Arconix_Flexslider_Widget extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'type' ); ?>"><?php _e( 'Configuration', 'acfs' ); ?>:</label>
             <select id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>">
                 <?php
-                $configs = array( 'slider', 'carousel' );
+                $configs = array( 'slider', 'carousel','slide-show' );
                 foreach( $configs as $config )
                     echo '<option value="' . $config . '" ' . selected( $config, $instance['type'], FALSE ) . '>' . $config . '</option>';
                 ?>
