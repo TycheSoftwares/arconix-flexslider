@@ -114,14 +114,14 @@ class Arconix_FlexSlider {
 
         $s = '<div class="arconix-slide-image-wrap">';
 
-        if ( $link_image == "true" )
+        if ( $link_image )
             $s .= '<a href="' . get_permalink() . '" rel="bookmark">';
 
         $s .= get_the_post_thumbnail( $id, $image_size );
 
         $s .= $this->slide_caption( $caption );
 
-        if ( $link_image == "true" )
+        if ( $link_image )
             $s .= '</a>';
 
         $s .= '</div>';
