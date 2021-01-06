@@ -1,7 +1,8 @@
 <?php
 /**
- * FlexSlider Test File
+ * FlexSlider Test File.
  *
+ * @package github-actions
  */
 
 echo 'just a test';
