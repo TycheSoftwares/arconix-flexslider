@@ -13,7 +13,7 @@
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  */
 
-class Arconix_Flexslider_Plugin {
+ class Arconix_Flexslider_Plugin {
 
     /**
      * Stores the current version of the plugin.
