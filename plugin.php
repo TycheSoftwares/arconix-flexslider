@@ -20,7 +20,7 @@
      *
      * @since   1.0.0
      * @access  private
-     * @var     string      $version    Current plugin version
+     * @var     string $version Current plugin version
      */
     private $version;
 
@@ -29,7 +29,7 @@
      *
      * @since   1.0.0
      * @access  private
-     * @var     string      $inc    The directory path to the includes folder
+     * @var     string $inc The directory path to the includes folder
      */
     private $inc;
 
@@ -82,6 +82,10 @@
 
 /** Vroom vroom */
 add_action( 'plugins_loaded', 'arconix_flexslider_plugin_run' );
+
+/**
+ * Instantiate Flexslider plugin class.
+ */
 function arconix_flexslider_plugin_run() {
-    new Arconix_Flexslider_Plugin;
+    new Arconix_Flexslider_Plugin();
 }
