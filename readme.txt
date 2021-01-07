@@ -3,8 +3,8 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfsdonation
 Tags: arconix, flexslider, slider, carousel, portfolio, testimonial, responsive
 Requires at least: 4.0
-Tested up to: 4.8.1
-Stable tag: 1.1.0
+Tested up to: 5.6
+Stable tag: 1.1.1
 License: GPLv2 or later
 
 A multi-purpose responsive slider that supports custom post types and responsive themes.
@@ -84,6 +84,10 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 4. Slider and carousel setup
 5. Text-focused (testimonials) slider display
 == Changelog ==
+= 1.1.1 =
+* Compatibility till 5.6.
+
+
 = 1.1.0 =
 * A new option slideshow is added to display the slider images. The Images will automatically rotate if slideshow option is selected.
 * Categories and Tags filter will now be available for the sliders only if the selected post type is Post.
