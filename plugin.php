@@ -1,16 +1,16 @@
 <?php
-/*
-  Plugin Name: Arconix FlexSlider
-  Plugin URI: http://www.arconixpc.com/plugins/arconix-flexslider
-  Description: A multi-purpose responsive jQuery slider that supports custom post types and responsive themes.
-
-  Author: John Gardner
-  Author URI: http://www.arconixpc.com
-
-  Version: 1.1.1
-
-  License: GPLv2 or later
-  License URI: http://www.opensource.org/licenses/gpl-license.php
+/**
+ * Plugin Name: Arconix FlexSlider
+ * Plugin URI: http://www.arconixpc.com/plugins/arconix-flexslider
+ * Description: A multi-purpose responsive jQuery slider that supports custom post types and responsive themes.
+ *
+ * Author: John Gardner
+ * Author URI: http://www.arconixpc.com
+ *
+ * Version: 1.1.1
+ *
+ * License: GPLv2 or later
+ * License URI: http://www.opensource.org/licenses/gpl-license.php
  */
 
 class Arconix_Flexslider_Plugin {
@@ -40,7 +40,7 @@ class Arconix_Flexslider_Plugin {
      */
     public function __construct() {
         $this->version = '1.1.1';
-        $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
+        $this->inc     = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
         $this->load_dependencies();
         $this->load_admin();
     }
