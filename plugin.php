@@ -36,7 +36,7 @@
     /**
      * Initialize the class and set its properties.
      *
-     * @since   1.0.0
+     * @since 1.0.0
      */
     public function __construct() {
         $this->version = '1.1.1';
@@ -52,7 +52,7 @@
      * - Public provides front-end functionality
      * - Dashboard Glancer loads the helper class for the admin dashboard
      *
-     * @since   1.0.0
+     * @since 1.0.0
      */
     private function load_dependencies() {
         require_once( $this->inc . 'class-arconix-flexslider-admin.php' );
