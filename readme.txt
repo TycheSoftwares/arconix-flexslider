@@ -3,7 +3,7 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfsdonation
 Tags: arconix, flexslider, slider, carousel, portfolio, testimonial, responsive
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.7
 Stable tag: 1.1.1
 License: GPLv2 or later
 
