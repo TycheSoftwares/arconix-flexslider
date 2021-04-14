@@ -168,18 +168,18 @@ class Arconix_FlexSlider {
             case 'image-title':
             case 'imagetitle':
                 $id = get_the_ID();
-                if ( get_post( get_post_thumbnail_id( $id ) )->post_excerpt == '') {
-                    $s = '';
-                } else {
-                $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_excerpt . '</p>';
-                }
+                $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_title . '</p>';
                 break;
 
             case 'image caption':
             case 'image-caption':
             case 'imagecaption':
                 $id = get_the_ID();
+                if ( get_post( get_post_thumbnail_id( $id ) )->post_excerpt == '') {
+                    $s = '';
+                } else {
                 $s = '<p class="flex-caption">' . get_post( get_post_thumbnail_id( $id ) )->post_excerpt . '</p>';
+                }
                 break;
 
             default:
